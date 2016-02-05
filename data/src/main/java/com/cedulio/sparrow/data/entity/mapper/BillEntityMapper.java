@@ -17,9 +17,13 @@ public class BillEntityMapper {
 
         if (billEntity != null) {
             bill = new Bill();
-            bill.setState(billEntity.getState());
+//            bill.setState(billEntity.getState());
 //            bill.setSummary(billEntity.getSummary());
 //            bill.setTransactions(billEntity.getTransactions());
+            bill.setId(billEntity.getId());
+            bill.setBarcode(billEntity.getBarcode());
+            bill.setLinhaDigitavel(billEntity.getLinhaDigitavel());
+
         }
 
         return bill;

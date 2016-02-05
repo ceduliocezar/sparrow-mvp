@@ -10,6 +10,12 @@ public class Bill {
 
     private List<Transaction> transactions;
 
+    private String id;
+
+    private String barcode;
+
+    private String linhaDigitavel;
+
     public State getState() {
         return state;
     }
@@ -35,6 +41,30 @@ public class Bill {
         this.transactions = transactions;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getLinhaDigitavel() {
+        return linhaDigitavel;
+    }
+
+    public void setLinhaDigitavel(String linhaDigitavel) {
+        this.linhaDigitavel = linhaDigitavel;
+    }
+
     public enum State {
         OVERDUE("overdue"),
         CLOSED("closed"),
@@ -43,7 +73,7 @@ public class Bill {
 
         final String name;
 
-        State(String name){
+        State(String name) {
             this.name = name;
         }
     }

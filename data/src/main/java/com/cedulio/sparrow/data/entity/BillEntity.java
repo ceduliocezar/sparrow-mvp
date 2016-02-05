@@ -3,8 +3,6 @@ package com.cedulio.sparrow.data.entity;
 import com.google.gson.annotations.SerializedName;
 
 import com.cedulio.sparrow.domain.Bill;
-import com.cedulio.sparrow.domain.Summary;
-import com.cedulio.sparrow.domain.Transaction;
 
 import java.util.List;
 
@@ -19,6 +17,15 @@ public class BillEntity {
 
     @SerializedName("line_items")
     private List<TransactionEntity> transactions;
+
+    @SerializedName("id")
+    private String id;
+
+    @SerializedName("barcode")
+    private String barcode;
+
+    @SerializedName("linha_digitavel")
+    private String linhaDigitavel;
 
     public Bill.State getState() {
         return state;
@@ -44,5 +51,29 @@ public class BillEntity {
     public void setTransactions(
             List<TransactionEntity> transactions) {
         this.transactions = transactions;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getLinhaDigitavel() {
+        return linhaDigitavel;
+    }
+
+    public void setLinhaDigitavel(String linhaDigitavel) {
+        this.linhaDigitavel = linhaDigitavel;
     }
 }

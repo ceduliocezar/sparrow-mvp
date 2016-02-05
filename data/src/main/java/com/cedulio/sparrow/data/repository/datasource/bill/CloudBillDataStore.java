@@ -7,7 +7,9 @@ import com.cedulio.sparrow.data.net.SparrowService;
 import java.io.IOException;
 import java.util.List;
 
+import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class CloudBillDataStore implements BillDataStore {
@@ -17,14 +19,18 @@ public class CloudBillDataStore implements BillDataStore {
 
     public CloudBillDataStore() {
         this.sparrowService = new Retrofit.Builder().baseUrl(SparrowService.BASE_URL)
-                .addConverterFactory(
-                        GsonConverterFactory.create()).build()
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
                 .create(SparrowService.class);
     }
 
     @Override
     public List<BillEntity> getBills() throws IOException {
-        return sparrowService.listBill().execute().body();
+
+        Call<List<BillEntity>> callEntity = sparrowService.listBill();
+        Response<List<BillEntity>> response = callEntity.execute();
+        List<BillEntity> billEntityList = response.body();
+        return billEntityList;
     }
 
     @Override
