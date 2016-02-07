@@ -18,6 +18,9 @@ android {
     }
     productFlavors {
     }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
 dependencies {
@@ -28,4 +31,6 @@ dependencies {
     compile project(':domain')
     compile project(':data')
     compile 'com.beardedhen:androidbootstrap:2.0.1'
+    compile 'com.jpardogo.materialtabstrip:library:1.1.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
 }

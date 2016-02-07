@@ -1,19 +1,27 @@
-package com.cedulio.sparrow.domain;
+package com.cedulio.sparrow.data.entity;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class Transaction {
+public class LineItemEntity {
 
+    @SerializedName("post_date")
     private Date postDate;
 
+    @SerializedName("amount")
     private double amount;
 
+    @SerializedName("index")
     private long index;
 
+    @SerializedName("charges")
     private long charges;
 
+    @SerializedName("href")
     private String href;
 
+    @SerializedName("title")
     private String title;
 
 

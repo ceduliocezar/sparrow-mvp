@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.cedulio.sparrow;
+package com.cedulio.custom_ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -29,6 +29,8 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.cedulio.sparrow.R;
 
 /**
  * The {@code TriangleView} allows for simple drawing of the triangle shape. The actual size and
@@ -106,6 +108,7 @@ public class TriangleView extends View {
                 mPaint.setColor(color);
             }
             mTrianglePath = null;
+            invalidate();
         }
     }
 

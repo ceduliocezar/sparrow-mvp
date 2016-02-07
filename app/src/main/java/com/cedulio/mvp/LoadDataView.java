@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.mvp;
+package com.cedulio.mvp;
 
 import android.content.Context;
 

@@ -19,13 +19,23 @@ public class BillDataRepositoryTest {
     private Bill bill;
 
     @Test
-    public void testCloud() throws Exception{
+    public void testCloud() throws Exception {
 
-//        BillDataRepository repository = new BillDataRepository();
-//
-//        List<Bill> list = repository.getBills();
-//
-//        Assert.assertFalse("The list should not be empty", list.isEmpty());
+        BillDataRepository repository = new BillDataRepository();
+
+        List<Bill> list = repository.getBills();
+
+        Assert.assertFalse("The list should not be empty", list.isEmpty());
+    }
+
+    @Test
+    public void testCloudMapper() throws Exception {
+
+        BillDataRepository repository = new BillDataRepository();
+
+        List<Bill> list = repository.getBills();
+
+        Assert.assertNotNull("Not mapped correctly id null", list.get(0).getId());
     }
 
 }

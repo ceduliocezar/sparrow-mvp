@@ -1,25 +1,37 @@
 package com.cedulio.sparrow.domain;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Summary {
+public class Summary implements Serializable{
 
+    @SerializedName("due_date")
     private Date dueDate;
 
+    @SerializedName("open_date")
     private Date openDate;
 
+    @SerializedName("close_date")
     private Date closeDate;
 
+    @SerializedName("past_balance")
     private double pastBalance;
 
+    @SerializedName("total_balance")
     private double totalBalance;
 
+    @SerializedName("interest")
     private double interest;
 
+    @SerializedName("total_cumulative")
     private double totalCumulative;
 
+    @SerializedName("paid")
     private double paid;
 
+    @SerializedName("minimum_payment")
     private double minimumPayment;
 
     public Date getDueDate() {

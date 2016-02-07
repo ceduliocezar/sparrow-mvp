@@ -1,23 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical">
 
 
-<android.support.v4.view.ViewPager
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal">
+
+
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:pstsIndicatorHeight="0dp"
+            app:pstsPaddingMiddle="true"
+            android:layout_gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/act_bill_lis__ln_back_holder"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/white_title_shadow_left">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FFF"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:id="@+id/act_bill_list__tv__back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="e5c4"
+                        android:textSize="40sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/act_bill_list__ln__shadow_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/white_title_shadow_right"
+                android:orientation="vertical"
+                android:paddingRight="42dp" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+    <com.cedulio.custom_ui.TriangleView
+        android:id="@+id/act_bill_list__tv"
+        android:layout_width="15dp"
+        android:layout_height="10dp"
+        android:layout_gravity="center_horizontal"
+        app:tr_color="#7ED321"
+        app:tr_direction="up" />
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/act_bill_list__vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.v4.view.PagerTitleStrip
-            android:id="@+id/pager_title_strip"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="#33b5e5"
-            android:textColor="#fff"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"/>
+        <!--<android.support.v4.view.PagerTitleStrip-->
+        <!--android:id="@+id/pager_title_strip"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="top"-->
+        <!--android:background="#33b5e5"-->
+        <!--android:paddingBottom="4dp"-->
+        <!--android:paddingTop="4dp"-->
+        <!--android:textColor="#fff" />-->
 
 
-</android.support.v4.view.ViewPager>
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
 
 

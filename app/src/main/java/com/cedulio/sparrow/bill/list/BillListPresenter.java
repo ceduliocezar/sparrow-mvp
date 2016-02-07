@@ -1,15 +1,15 @@
 package com.cedulio.sparrow.bill.list;
 
+import android.os.Bundle;
+
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.Bill;
-import com.cedulio.sparrow.domain.Transaction;
+import com.cedulio.sparrow.domain.LineItem;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;
 import com.cedulio.sparrow.domain.interactor.bill.formatter.MonthExpensesFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.formatter.TransactionDescriptionFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityManager;
-import com.cedulio.sparrow.mvp.Presenter;
-
-import android.util.Log;
+import com.cedulio.mvp.Presenter;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,20 +32,45 @@ public class BillListPresenter extends Presenter {
     public BillListPresenter(BillListView view) {
         this.mView = view;
         this.getBills = new GetBills(new BillDataRepository());
+        this.viewModel = new BillListViewModel();
     }
 
-    public void load() {
-        Log.d("debug", "load");
-        try {
-            List<Bill> bills = getBills.execute();
-            mView.renderBillList(bills);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void loadData() {
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                List<Bill> bills = null;
+                try {
+                    bills = getBills.execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                setViewModelBills(bills);
+                selectFirstBill(bills);
+
+                renderBills(bills);
+            }
+        };
+
+        new Thread(r).start();
     }
 
-    public String getFormatedDescription(Transaction transaction) {
-        return getTransactionDescriptionFormatter().format(transaction,
+    private void renderBills(List<Bill> bills) {
+        mView.renderBillList(bills);
+    }
+
+    private void selectFirstBill(List<Bill> bills) {
+        viewModel.setCurrentBillSelected(bills.get(0));
+    }
+
+    private void setViewModelBills(List<Bill> bills) {
+        viewModel.setBills(bills);
+    }
+
+    public String getFormatedDescription(LineItem lineItem) {
+        return getTransactionDescriptionFormatter().format(lineItem,
                 getStateFromCurrentBillSelected());
     }
 
@@ -77,4 +102,46 @@ public class BillListPresenter extends Presenter {
     private MonthExpensesFormatter getMonthExpensesFormatter() {
         return mMonthExpensesFormatter;
     }
+
+    public int getCountBills() {
+        return getViewModel().getBills().size();
+    }
+
+    public String getPageTitle(int position) {
+        return "MAI " + position;
+    }
+
+    public void onPauseView() {
+
+    }
+
+    public void onResumeView() {
+
+
+    }
+
+    private void updateView() {
+        // TODO
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+
+        if (getViewModel().isLoaded()) {
+            updateView();
+        } else {
+            loadData();
+        }
+    }
+
+    public Bill getBill(int position) {
+        return viewModel.getBills().get(position);
+    }
+
+    public void onPageSelected(int position) {
+        getViewModel().setBillSelectedPosition(position);
+
+        mView.updateMarker(getViewModel().getBills().get(position));
+    }
+
+
 }

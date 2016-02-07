@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.bill.list;
 
-import com.cedulio.sparrow.mvp.ViewModel;
+import com.cedulio.mvp.ViewModel;
 import com.cedulio.sparrow.domain.Bill;
 
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ public class BillListViewModel extends ViewModel {
     private List<Bill> bills = new ArrayList<>();
 
     private Bill currentBillSelected;
+    private int billSelectedPosition;
 
     public List<Bill> getBills() {
         return bills;
@@ -26,5 +27,13 @@ public class BillListViewModel extends ViewModel {
 
     public void setCurrentBillSelected(Bill currentBillSelected) {
         this.currentBillSelected = currentBillSelected;
+    }
+
+    public void setBillSelectedPosition(int billSelectedPosition) {
+        this.billSelectedPosition = billSelectedPosition;
+    }
+
+    public int getBillSelectedPosition() {
+        return billSelectedPosition;
     }
 }

@@ -1,10 +1,11 @@
-package com.cedulio.sparrow.data.entity;
+package com.cedulio.sparrow.domain;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TransactionEntity {
+public class LineItem implements Serializable {
 
     @SerializedName("post_date")
     private Date postDate;

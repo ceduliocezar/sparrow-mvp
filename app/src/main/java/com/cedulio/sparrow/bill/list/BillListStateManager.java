@@ -1,5 +1,7 @@
 package com.cedulio.sparrow.bill.list;
 
-public class BillListStateManager {
+import com.cedulio.mvp.StateManager;
+
+public class BillListStateManager extends StateManager{
 
 }

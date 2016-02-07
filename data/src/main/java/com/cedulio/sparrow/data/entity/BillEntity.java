@@ -16,7 +16,7 @@ public class BillEntity {
     private SummaryEntity summary;
 
     @SerializedName("line_items")
-    private List<TransactionEntity> transactions;
+    private List<LineItemEntity> lineItems;
 
     @SerializedName("id")
     private String id;
@@ -44,13 +44,12 @@ public class BillEntity {
         this.summary = summary;
     }
 
-    public List<TransactionEntity> getTransactions() {
-        return transactions;
+    public List<LineItemEntity> getLineItems() {
+        return lineItems;
     }
 
-    public void setTransactions(
-            List<TransactionEntity> transactions) {
-        this.transactions = transactions;
+    public void setLineItems(List<LineItemEntity> lineItems) {
+        this.lineItems = lineItems;
     }
 
     public String getId() {

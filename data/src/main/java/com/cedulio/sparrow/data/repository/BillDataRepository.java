@@ -23,7 +23,6 @@ public class BillDataRepository implements BillRepository {
     @Override
     public List<Bill> getBills() throws IOException {
 
-        Log.d("debug", "getBills");
         BillDataStore dataStore = BillDataStoreFactory.getInstance().createCloudDataStore();
 
         return mapper.transform(dataStore.getBills());

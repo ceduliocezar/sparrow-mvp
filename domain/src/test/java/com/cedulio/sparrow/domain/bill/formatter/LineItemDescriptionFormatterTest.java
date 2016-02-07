@@ -3,7 +3,7 @@ package com.cedulio.sparrow.domain.bill.formatter;
 
 import com.cedulio.sparrow.domain.interactor.bill.formatter.TransactionDescriptionFormatter;
 import com.cedulio.sparrow.domain.Bill;
-import com.cedulio.sparrow.domain.Transaction;
+import com.cedulio.sparrow.domain.LineItem;
 import com.cedulio.sparrow.domain.R;
 
 import org.junit.Assert;
@@ -18,13 +18,13 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class TransactionDescriptionFormatterTest {
+public class LineItemDescriptionFormatterTest {
 
     @Mock
     private Context mContext;
 
     @Mock
-    private Transaction mTransaction;
+    private LineItem mLineItem;
 
     @Test
     public void testBRFormatBillNotFuture() {
@@ -36,7 +36,7 @@ public class TransactionDescriptionFormatterTest {
 
         TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
 
-        String formattedDescription = formatter.format(mTransaction, state);
+        String formattedDescription = formatter.format(mLineItem, state);
 
         Assert.assertTrue("In this case description should  be equals title",
                 formattedDescription.equals(mockedTitle));
@@ -55,7 +55,7 @@ public class TransactionDescriptionFormatterTest {
 
         TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
 
-        String formattedDescription = formatter.format(mTransaction, state);
+        String formattedDescription = formatter.format(mLineItem, state);
 
         Assert.assertTrue("In this case description should  be equals title",
                 formattedDescription.equals(mockedTitle));
@@ -80,7 +80,7 @@ public class TransactionDescriptionFormatterTest {
 
         TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
 
-        String formattedDescription = formatter.format(mTransaction, state);
+        String formattedDescription = formatter.format(mLineItem, state);
 
         String string = String.format("%s %d/%d", mockedTitle, index, charges);
 
@@ -107,7 +107,7 @@ public class TransactionDescriptionFormatterTest {
 
         TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
 
-        String formattedDescription = formatter.format(mTransaction, state);
+        String formattedDescription = formatter.format(mLineItem, state);
 
         String string = String.format("%s %d/%d", mockedTitle, index, charges);
 
@@ -122,14 +122,14 @@ public class TransactionDescriptionFormatterTest {
     }
 
     private void mockIndex(long index) {
-        when(mTransaction.getIndex()).thenReturn(index);
+        when(mLineItem.getIndex()).thenReturn(index);
     }
 
     private void mockTitle(String title) {
-        when(mTransaction.getTitle()).thenReturn(title);
+        when(mLineItem.getTitle()).thenReturn(title);
     }
 
     private void mockTotalCharges(long charges) {
-        when(mTransaction.getCharges()).thenReturn(charges);
+        when(mLineItem.getCharges()).thenReturn(charges);
     }
 }
