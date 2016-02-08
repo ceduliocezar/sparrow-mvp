@@ -2,7 +2,7 @@ package com.cedulio.sparrow.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 import java.util.List;
 

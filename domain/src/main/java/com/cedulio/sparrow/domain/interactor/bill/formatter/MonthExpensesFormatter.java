@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.interactor.bill.formatter;
 
 import com.cedulio.sparrow.domain.utilities.BrazilianLocale;
-import com.cedulio.sparrow.domain.utilities.CurrencyFormatter;
+import com.cedulio.sparrow.domain.interactor.bill.CurrencyFormatter;
 import com.cedulio.sparrow.domain.interactor.UseCase;
 
 public class MonthExpensesFormatter extends UseCase {

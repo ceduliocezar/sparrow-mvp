@@ -5,7 +5,7 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.cedulio.sparrow.R;
 import com.cedulio.sparrow.bill.list.adapter.LineItemAdapter;
 import com.cedulio.sparrow.bill.list.utilities.BillColorSelector;
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

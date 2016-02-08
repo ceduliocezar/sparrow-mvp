@@ -4,7 +4,7 @@ package com.cedulio.sparrow.bill.list.utilities;
 import android.content.Context;
 
 import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 public class BillColorSelector {
 

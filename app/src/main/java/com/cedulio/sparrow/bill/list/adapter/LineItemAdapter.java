@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.domain.LineItem;
+import com.cedulio.sparrow.domain.model.LineItem;
 
 import java.util.List;
 

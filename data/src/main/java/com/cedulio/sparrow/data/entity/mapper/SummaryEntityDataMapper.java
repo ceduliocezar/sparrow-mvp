@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.data.entity.mapper;
 
 import com.cedulio.sparrow.data.entity.SummaryEntity;
-import com.cedulio.sparrow.domain.Summary;
+import com.cedulio.sparrow.domain.model.Summary;
 
 import java.util.ArrayList;
 import java.util.Collection;

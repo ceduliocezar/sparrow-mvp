@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.domain.interactor.bill.visibility;
 
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 public class InterestVisibilityManager extends BillFieldVisibilityManager {
 

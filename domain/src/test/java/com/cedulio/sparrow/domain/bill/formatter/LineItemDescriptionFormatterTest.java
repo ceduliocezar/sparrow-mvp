@@ -2,8 +2,8 @@ package com.cedulio.sparrow.domain.bill.formatter;
 
 
 import com.cedulio.sparrow.domain.interactor.bill.formatter.TransactionDescriptionFormatter;
-import com.cedulio.sparrow.domain.Bill;
-import com.cedulio.sparrow.domain.LineItem;
+import com.cedulio.sparrow.domain.model.Bill;
+import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.R;
 
 import org.junit.Assert;

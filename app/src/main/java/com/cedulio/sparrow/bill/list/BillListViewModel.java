@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.bill.list;
 
 import com.cedulio.mvp.ViewModel;
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 import java.util.ArrayList;
 import java.util.List;

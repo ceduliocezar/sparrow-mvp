@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.domain;
+package com.cedulio.sparrow.domain.model;
 
 import com.google.gson.annotations.SerializedName;
 

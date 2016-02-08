@@ -1,8 +1,8 @@
 package com.cedulio.sparrow.domain.bill.visibility;
 
 import com.cedulio.sparrow.domain.interactor.bill.visibility.InterestVisibilityManager;
-import com.cedulio.sparrow.domain.Bill;
-import com.cedulio.sparrow.domain.Summary;
+import com.cedulio.sparrow.domain.model.Bill;
+import com.cedulio.sparrow.domain.model.Summary;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.bill.list;
 
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.mvp.LoadDataView;
 
 import java.util.List;

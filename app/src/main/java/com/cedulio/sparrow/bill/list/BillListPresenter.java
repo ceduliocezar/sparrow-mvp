@@ -3,21 +3,22 @@ package com.cedulio.sparrow.bill.list;
 import android.os.Bundle;
 
 import com.cedulio.sparrow.data.repository.BillDataRepository;
-import com.cedulio.sparrow.domain.Bill;
-import com.cedulio.sparrow.domain.LineItem;
+import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
+import com.cedulio.sparrow.domain.model.Bill;
+import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;
 import com.cedulio.sparrow.domain.interactor.bill.formatter.MonthExpensesFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.formatter.TransactionDescriptionFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityManager;
 import com.cedulio.mvp.Presenter;
+import com.cedulio.threading.MainThreadAndroid;
 
-import java.io.IOException;
 import java.util.List;
 
 
-public class BillListPresenter extends Presenter {
+public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
-    private final BillListView mView;
+    private final BillListView view;
 
     private BillListViewModel viewModel;
 
@@ -30,35 +31,19 @@ public class BillListPresenter extends Presenter {
     private GetBills getBills;
 
     public BillListPresenter(BillListView view) {
-        this.mView = view;
-        this.getBills = new GetBills(new BillDataRepository());
+        this.view = view;
+        this.getBills = new GetBills(new BillDataRepository(), this,
+                MainThreadAndroid.getInstance(), ThreadExecutor.getInstance());
+
         this.viewModel = new BillListViewModel();
     }
 
     private void loadData() {
-
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                List<Bill> bills = null;
-                try {
-                    bills = getBills.execute();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                setViewModelBills(bills);
-                selectFirstBill(bills);
-
-                renderBills(bills);
-            }
-        };
-
-        new Thread(r).start();
+        getBills.execute();
     }
 
     private void renderBills(List<Bill> bills) {
-        mView.renderBillList(bills);
+        view.renderBillList(bills);
     }
 
     private void selectFirstBill(List<Bill> bills) {
@@ -140,8 +125,24 @@ public class BillListPresenter extends Presenter {
     public void onPageSelected(int position) {
         getViewModel().setBillSelectedPosition(position);
 
-        mView.updateMarker(getViewModel().getBills().get(position));
+        getView().updateMarker(getViewModel().getBills().get(position));
     }
 
+    @Override
+    public void onLoadBills(List<Bill> bills) {
+        setViewModelBills(bills);
+        selectFirstBill(bills);
 
+        renderBills(bills);
+    }
+
+    @Override
+    public void onErrorLoadingBills(Exception e) {
+        e.printStackTrace();
+        getView().showError(e.getMessage()); // TODO HANDLE THIS CORRECTLY
+    }
+
+    public BillListView getView() {
+        return view;
+    }
 }

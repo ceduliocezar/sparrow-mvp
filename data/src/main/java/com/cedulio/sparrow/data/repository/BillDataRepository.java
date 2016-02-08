@@ -4,10 +4,8 @@ package com.cedulio.sparrow.data.repository;
 import com.cedulio.sparrow.data.entity.mapper.BillEntityMapper;
 import com.cedulio.sparrow.data.repository.datasource.bill.BillDataStore;
 import com.cedulio.sparrow.data.repository.datasource.bill.BillDataStoreFactory;
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.repository.BillRepository;
-
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;

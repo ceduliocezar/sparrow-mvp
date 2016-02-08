@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.data.repository;
 
 
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 import org.junit.Assert;
 import org.junit.Test;

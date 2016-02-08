@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.data.entity.mapper;
 
 import com.cedulio.sparrow.data.entity.LineItemEntity;
-import com.cedulio.sparrow.domain.LineItem;
+import com.cedulio.sparrow.domain.model.LineItem;
 
 import java.util.ArrayList;
 import java.util.Collection;

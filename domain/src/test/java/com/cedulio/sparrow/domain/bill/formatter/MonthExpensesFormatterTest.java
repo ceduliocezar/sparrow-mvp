@@ -2,7 +2,7 @@ package com.cedulio.sparrow.domain.bill.formatter;
 
 
 import com.cedulio.sparrow.domain.interactor.bill.formatter.MonthExpensesFormatter;
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -2,11 +2,9 @@ package com.cedulio.sparrow.data.entity.mapper;
 
 
 import com.cedulio.sparrow.data.entity.BillEntity;
-import com.cedulio.sparrow.domain.Bill;
-import com.cedulio.sparrow.domain.LineItem;
-import com.cedulio.sparrow.domain.Summary;
-
-import android.util.Log;
+import com.cedulio.sparrow.domain.model.Bill;
+import com.cedulio.sparrow.domain.model.LineItem;
+import com.cedulio.sparrow.domain.model.Summary;
 
 import java.util.ArrayList;
 import java.util.Collection;

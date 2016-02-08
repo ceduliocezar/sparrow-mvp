@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.repository;
 
 
-import com.cedulio.sparrow.domain.Bill;
+import com.cedulio.sparrow.domain.model.Bill;
 
 import java.io.IOException;
 import java.util.List;
