@@ -7,11 +7,11 @@ import com.cedulio.sparrow.domain.interactor.UseCase;
 
 import android.content.Context;
 
-public class TransactionDescriptionFormatter extends UseCase {
+public class LineItemDescriptionFormatter extends UseCase {
 
     private final Context context;
 
-    public TransactionDescriptionFormatter(Context context) {
+    public LineItemDescriptionFormatter(Context context) {
         this.context = context;
     }
 

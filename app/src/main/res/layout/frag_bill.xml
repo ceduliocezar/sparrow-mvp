@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="#f7f7f7">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <LinearLayout
+                android:id="@+id/frag_bill__ln__background_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="40dp"
+                android:background="#7ED321"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+            <TextView
+                    android:id="@+id/frag_bill__tv__total_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ VALUE"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#FFF"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:id="@+id/frag_bill__tv__close_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Vencimento"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#FFF"/>
+
+            <TextView
+                    android:id="@+id/frag_bill__tv__additional_information"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fechamento"
+                    android:layout_marginTop="10dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#FFF"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/act_bill__ln__subheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+        <LinearLayout
+                android:id="@+id/fra_bill__ln__paid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/paid"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="#7ED321"
+
+                    />
+
+            <TextView
+                    android:id="@+id/frag_bill__tv__paid_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R$ VALUE"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#7ED321"
+                    android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/frag_bill_list__ln__fechada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+            <RelativeLayout
+                    android:id="@+id/frag_bill__rl__closed_informantion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp">
+
+                <TextView
+                        android:id="@+id/frag_bill_list__tv__expenses_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="@string/month_expenses"/>
+
+                <TextView
+                        android:id="@+id/frag_bill__tv__expenses_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="#686868"
+                        android:text="R$ VALUE"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/frag_bill_list__tv__unpaid_values_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:paddingTop="10dp"
+                        android:layout_below="@+id/frag_bill_list__tv__expenses_label"
+                        android:text="@string/unpaid_values"/>
+
+                <TextView
+                        android:id="@+id/frag_bill__tv__unpaid_values_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:paddingTop="10dp"
+                        android:textColor="#686868"
+                        android:layout_below="@+id/frag_bill_list__tv__expenses_label"
+                        android:text="R$ VALUE"
+                        android:textStyle="bold"/>
+
+                <TextView
+                        android:id="@+id/frag_bill_list__tv__interest_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:paddingTop="10dp"
+                        android:layout_below="@+id/frag_bill_list__tv__unpaid_values_label"
+                        android:text="@string/interest_label"/>
+
+                <TextView
+                        android:id="@+id/frag_bill__tv__interest_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="#686868"
+                        android:paddingTop="10dp"
+                        android:layout_below="@+id/frag_bill__tv__unpaid_values_value"
+                        android:text="R$ VALUE"
+                        android:textStyle="bold"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/frag_bill__bt__gerar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:text="@string/gerar_boleto"
+                app:bootstrapBrand="danger"
+                app:bootstrapSize="lg"
+                app:buttonMode="regular"
+                app:roundedCorners="true"
+                app:showOutline="true"/>
+
+    </LinearLayout>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#B6B6B6"/>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:id="@+id/frag_bill__tv__period_header"
+                android:textColor="#979797"
+                android:text="@string/line_items_period_header"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="#979797"
+                android:id="@+id/frag_bill__tv__value_header"
+                android:text="@string/line_items_value_header"/>
+    </RelativeLayout>
+
+    <ListView
+            android:id="@+id/frag_bill__lv__line_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"/>
+
+
+</LinearLayout>

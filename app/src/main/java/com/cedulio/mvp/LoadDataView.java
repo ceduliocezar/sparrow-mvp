@@ -1,8 +1,6 @@
 package com.cedulio.mvp;
 
-import android.content.Context;
-
-public interface LoadDataView {
+public interface LoadDataView extends MVPView {
 
     void showLoading();
 
@@ -16,7 +14,4 @@ public interface LoadDataView {
     void hideRetry();
 
 
-    void showError(String message);
-
-    Context getContext();
 }

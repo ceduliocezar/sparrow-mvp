@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.bill.formatter;
 
 
-import com.cedulio.sparrow.domain.interactor.bill.formatter.TransactionDescriptionFormatter;
+import com.cedulio.sparrow.domain.interactor.bill.formatter.LineItemDescriptionFormatter;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.R;
@@ -34,7 +34,7 @@ public class LineItemDescriptionFormatterTest {
         String mockedTitle = "Futurama Guaicurus";
         mockTitle(mockedTitle);
 
-        TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
 
         String formattedDescription = formatter.format(mLineItem, state);
 
@@ -53,7 +53,7 @@ public class LineItemDescriptionFormatterTest {
         long charges = 0;
         mockTotalCharges(charges);
 
-        TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
 
         String formattedDescription = formatter.format(mLineItem, state);
 
@@ -78,7 +78,7 @@ public class LineItemDescriptionFormatterTest {
         String stringFormat = "%s %d/%d";
         mockStringMessage(stringFormat);
 
-        TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
 
         String formattedDescription = formatter.format(mLineItem, state);
 
@@ -105,7 +105,7 @@ public class LineItemDescriptionFormatterTest {
         String stringFormat = "%s %d/%d";
         mockStringMessage(stringFormat);
 
-        TransactionDescriptionFormatter formatter = new TransactionDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
 
         String formattedDescription = formatter.format(mLineItem, state);
 

@@ -3,16 +3,15 @@ package com.cedulio.sparrow.bill.list;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.cedulio.custom_ui.TriangleView;
-import com.cedulio.sparrow.bill.list.adapter.BillViewPagerAdapter;
-
 import com.cedulio.sparrow.R;
+import com.cedulio.sparrow.bill.list.adapter.BillViewPagerAdapter;
 import com.cedulio.sparrow.bill.list.utilities.BillColorSelector;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,18 +20,29 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class BillListActivity extends AppCompatActivity implements BillListView, BillViewPagerAdapter.BillViewPagerListener, ViewPager.OnPageChangeListener {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class BillListActivity extends AppCompatActivity
+        implements BillListView, BillViewPagerAdapter.BillViewPagerListener,
+        ViewPager.OnPageChangeListener {
 
 
-    private ViewPager mPager;
+    @Bind(R.id.act_bill_list__vp)
+    ViewPager viewPagerBills;
+
+    @Bind(R.id.act_bill_list_tab_strip)
+    PagerSlidingTabStrip tabs;
+
+    @Bind(R.id.act_bill_list__tv__back)
+    TextView iconBack;
+
+    @Bind(R.id.act_bill_list__tv)
+    TriangleView triangleView;
 
     private BillViewPagerAdapter mPagerAdapter;
 
-    private PagerSlidingTabStrip tabs;
-
-    private TextView iconBack;
-    private BillListPresenter billPresenter;
-    private TriangleView triangleView;
+    private BillListPresenter billListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,64 +50,73 @@ public class BillListActivity extends AppCompatActivity implements BillListView,
 
         setContentView(R.layout.act_bill_list);
 
-        initPresenter();
-        initViewReferences();
+        ButterKnife.bind(this);
 
-        getBillPresenter().onCreate(savedInstanceState);
+        initPresenter();
+        initBackButton();
+        setTabsListener();
+
+        getBillListPresenter().onCreateView();
+    }
+
+    private void setTabsListener() {
+        tabs.setOnPageChangeListener(this);
+    }
+
+    private void initBackButton() {
+        iconBack.setTypeface(getIconTypeFace());
+        iconBack.setText(getBackIconString());
+    }
+
+    private Typeface getIconTypeFace() {
+        return Typeface.createFromAsset(getAssets(), "icomoon.ttf");
+    }
+
+    @NonNull
+    private String getBackIconString() {
+        return String.valueOf((char) 0xe5c4);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        getBillPresenter().onPauseView();
+        getBillListPresenter().onPauseView();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getBillPresenter().onResumeView();
+        getBillListPresenter().onResumeView();
     }
 
     private void initPresenter() {
-        this.billPresenter = new BillListPresenter(this);
-    }
-
-    private void initViewReferences() {
-        mPager = (ViewPager) findViewById(R.id.act_bill_list__vp);
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        tabs.setOnPageChangeListener(this);
-        iconBack = (TextView) findViewById(R.id.act_bill_list__tv__back);
-        triangleView = (TriangleView) findViewById(R.id.act_bill_list__tv);
+        this.billListPresenter = new BillListPresenter(this);
     }
 
     @Override
     public void renderBillList(final List<Bill> bills) {
 
+        mPagerAdapter = new BillViewPagerAdapter(getSupportFragmentManager(),
+                BillListActivity.this, BillListActivity.this);
+        viewPagerBills.setAdapter(mPagerAdapter);
 
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mPagerAdapter = new BillViewPagerAdapter(getSupportFragmentManager(),
-                        BillListActivity.this, BillListActivity.this);
+        tabs.setViewPager(viewPagerBills);
+    }
 
-                mPager.setAdapter(mPagerAdapter);
-
-                tabs.setViewPager(mPager);
-
-                Typeface typeface = Typeface.createFromAsset(getAssets(), "icomoon.ttf");
-                iconBack.setTypeface(typeface);
-
-                iconBack.setText(String.valueOf((char) 0xe5c4));
-                iconBack.setTextColor(Color.parseColor("#7ED321"));
-
-            }
-        });
-
+    private void setIconBackColor(int idColor) {
+        iconBack.setTextColor(idColor);
     }
 
     @Override
-    public void updateMarker(Bill bill) {
-        triangleView.setColor(BillColorSelector.getColor(bill.getState(), this));
+    public void updateViews(Bill bill) {
+        int idColor = BillColorSelector.getColor(bill.getState(), this);
+        triangleView.setColor(idColor);
+        setIconBackColor(idColor);
+    }
+
+    @Override
+    public void selectCurrentBillByPosition(int i) {
+        viewPagerBills.setCurrentItem(i, true);
     }
 
     @Override
@@ -132,21 +151,21 @@ public class BillListActivity extends AppCompatActivity implements BillListView,
 
     @Override
     public int getCountBills() {
-        return getBillPresenter().getCountBills();
+        return getBillListPresenter().getCountBills();
     }
 
     @Override
     public String getPageTitle(int position) {
-        return getBillPresenter().getPageTitle(position);
+        return getBillListPresenter().getPageTitle(position);
     }
 
     @Override
     public Bill getBill(int position) {
-        return getBillPresenter().getBill(position);
+        return getBillListPresenter().getBill(position);
     }
 
-    private BillListPresenter getBillPresenter() {
-        return billPresenter;
+    private BillListPresenter getBillListPresenter() {
+        return billListPresenter;
     }
 
     @Override
@@ -156,7 +175,7 @@ public class BillListActivity extends AppCompatActivity implements BillListView,
 
     @Override
     public void onPageSelected(int position) {
-        getBillPresenter().onPageSelected(position);
+        getBillListPresenter().onPageSelected(position);
     }
 
     @Override

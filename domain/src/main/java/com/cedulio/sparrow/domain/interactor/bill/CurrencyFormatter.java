@@ -12,4 +12,9 @@ public class CurrencyFormatter extends UseCase {
         return formatter.format(value);
     }
 
+    public String formatWithoutSymbol(double value, Locale locale) {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
+        return formatter.format(value);
+    }
+
 }

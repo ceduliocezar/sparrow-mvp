@@ -8,6 +8,7 @@
     <TextView
         android:id="@+id/view_pager_bill_tab__tv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="TEXTO" />
+        android:layout_height="wrap_content"
+        android:text="TEXTO" />
 
 </LinearLayout>

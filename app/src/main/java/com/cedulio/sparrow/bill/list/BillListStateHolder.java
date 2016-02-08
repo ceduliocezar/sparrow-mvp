@@ -1,12 +1,12 @@
 package com.cedulio.sparrow.bill.list;
 
-import com.cedulio.mvp.ViewModel;
+import com.cedulio.mvp.StateHolder;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BillListViewModel extends ViewModel {
+public class BillListStateHolder extends StateHolder {
 
     private List<Bill> bills = new ArrayList<>();
 

@@ -12,9 +12,12 @@ import java.util.List;
 public class GetBills extends AbstractAsyncUseCase {
 
     private CallBack callBack;
+
     private BillRepository billRepository;
 
-    public GetBills(BillRepository billRepository, CallBack callBack, MainThread mainThread, Executor threadExecutor) {
+    public GetBills(
+            BillRepository billRepository, CallBack callBack, MainThread mainThread,
+            Executor threadExecutor) {
         super(threadExecutor, mainThread);
 
         setBillRepository(billRepository);
@@ -24,33 +27,47 @@ public class GetBills extends AbstractAsyncUseCase {
     @Override
     public void run() {
         try {
-            List<Bill> list = getBillRepository().getBills();
-            getCallBack().onLoadBills(list);
+            final List<Bill> list = getBillRepository().getBills();
+            deliverBillsOnMainThread(list);
         } catch (Exception e) {
-            getCallBack().onErrorLoadingBills(e);
+            notifyErrorOnMainThread(e);
         }
     }
 
-    public interface CallBack {
-        void onLoadBills(List<Bill> bills);
+    private void notifyErrorOnMainThread(Exception e) {
+        getCallBack().onErrorLoadingBills(e);
+    }
 
-        void onErrorLoadingBills(Exception e);
+    private void deliverBillsOnMainThread(final List<Bill> list) {
+        getMainThread().post(new Runnable() {
+            @Override
+            public void run() {
+                getCallBack().onLoadBills(list);
+            }
+        });
     }
 
     private CallBack getCallBack() {
         return callBack;
     }
 
-    private BillRepository getBillRepository() {
-        return billRepository;
-    }
-
     private void setCallBack(CallBack callBack) {
         this.callBack = callBack;
     }
 
+    private BillRepository getBillRepository() {
+        return billRepository;
+    }
+
     private void setBillRepository(BillRepository billRepository) {
         this.billRepository = billRepository;
+    }
+
+    public interface CallBack {
+
+        void onLoadBills(List<Bill> bills);
+
+        void onErrorLoadingBills(Exception e);
     }
 }
 

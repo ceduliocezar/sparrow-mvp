@@ -1,6 +1,6 @@
 package com.cedulio.mvp;
 
-public abstract class ViewModel {
+public abstract class StateHolder {
 
     private boolean loaded;
 

@@ -2,17 +2,17 @@ package com.cedulio.sparrow.domain.utilities;
 
 import java.util.Locale;
 
-public class BrazilianLocale {
+public class DefaultLocale {
 
-    private static BrazilianLocale INSTANCE = new BrazilianLocale();
+    private static DefaultLocale INSTANCE = new DefaultLocale();
 
     private Locale locale = new Locale("pt", "BR");
 
-    private BrazilianLocale() {
+    private DefaultLocale() {
 
     }
 
-    public static BrazilianLocale getInstance() {
+    public static DefaultLocale getInstance() {
         return INSTANCE;
     }
 

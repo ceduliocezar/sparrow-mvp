@@ -1,16 +1,15 @@
 package com.cedulio.sparrow.bill.list;
 
-import android.os.Bundle;
-
+import com.cedulio.mvp.Presenter;
+import com.cedulio.sparrow.bill.list.formatter.MonthFormatter;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
+import com.cedulio.sparrow.domain.interactor.bill.GetBills;
+import com.cedulio.sparrow.domain.interactor.bill.formatter.LineItemDescriptionFormatter;
+import com.cedulio.sparrow.domain.interactor.bill.formatter.MonthExpensesFormatter;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityManager;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
-import com.cedulio.sparrow.domain.interactor.bill.GetBills;
-import com.cedulio.sparrow.domain.interactor.bill.formatter.MonthExpensesFormatter;
-import com.cedulio.sparrow.domain.interactor.bill.formatter.TransactionDescriptionFormatter;
-import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityManager;
-import com.cedulio.mvp.Presenter;
 import com.cedulio.threading.MainThreadAndroid;
 
 import java.util.List;
@@ -20,9 +19,9 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     private final BillListView view;
 
-    private BillListViewModel viewModel;
+    private BillListStateHolder viewModel;
 
-    private TransactionDescriptionFormatter transactionDescriptionFormatter;
+    private LineItemDescriptionFormatter mLineItemDescriptionFormatter;
 
     private GerarBoletoVisibilityManager visibilityManagerGerarBoleto;
 
@@ -35,7 +34,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         this.getBills = new GetBills(new BillDataRepository(), this,
                 MainThreadAndroid.getInstance(), ThreadExecutor.getInstance());
 
-        this.viewModel = new BillListViewModel();
+        this.viewModel = new BillListStateHolder();
     }
 
     private void loadData() {
@@ -43,19 +42,33 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     private void renderBills(List<Bill> bills) {
-        view.renderBillList(bills);
+        getView().renderBillList(bills);
     }
 
-    private void selectFirstBill(List<Bill> bills) {
-        viewModel.setCurrentBillSelected(bills.get(0));
+    private void selectClosedBill(List<Bill> bills) {
+
+        int closedBillPosition = getClosedBillPosition(bills);
+        getView().selectCurrentBillByPosition(closedBillPosition);
+        getViewModel().setCurrentBillSelected(bills.get(closedBillPosition));
+    }
+
+    private int getClosedBillPosition(List<Bill> bills) {
+
+        for (int i = 0; i < bills.size(); i++) {
+            if (bills.get(i).getState() == Bill.State.CLOSED) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     private void setViewModelBills(List<Bill> bills) {
-        viewModel.setBills(bills);
+        getViewModel().setBills(bills);
     }
 
     public String getFormatedDescription(LineItem lineItem) {
-        return getTransactionDescriptionFormatter().format(lineItem,
+        return getLineItemDescriptionFormatter().format(lineItem,
                 getStateFromCurrentBillSelected());
     }
 
@@ -68,12 +81,12 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
                 getViewModel().getCurrentBillSelected());
     }
 
-    private BillListViewModel getViewModel() {
+    private BillListStateHolder getViewModel() {
         return viewModel;
     }
 
-    private TransactionDescriptionFormatter getTransactionDescriptionFormatter() {
-        return transactionDescriptionFormatter;
+    private LineItemDescriptionFormatter getLineItemDescriptionFormatter() {
+        return mLineItemDescriptionFormatter;
     }
 
     private GerarBoletoVisibilityManager getVisibilityManagerGerarBoleto() {
@@ -93,27 +106,20 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     public String getPageTitle(int position) {
-        return "MAI " + position;
-    }
-
-    public void onPauseView() {
-
-    }
-
-    public void onResumeView() {
-
-
+        return MonthFormatter
+                .format(getViewModel().getBills().get(position).getSummary().getCloseDate());
     }
 
     private void updateView() {
         // TODO
     }
 
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreateView() {
 
         if (getViewModel().isLoaded()) {
             updateView();
         } else {
+            getView().showLoading();
             loadData();
         }
     }
@@ -124,14 +130,15 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     public void onPageSelected(int position) {
         getViewModel().setBillSelectedPosition(position);
-
-        getView().updateMarker(getViewModel().getBills().get(position));
+        getView().updateViews(getViewModel().getBills().get(position));
     }
 
     @Override
     public void onLoadBills(List<Bill> bills) {
+        getView().hideLoading();
+
         setViewModelBills(bills);
-        selectFirstBill(bills);
+        selectClosedBill(bills);
 
         renderBills(bills);
     }
@@ -139,10 +146,19 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     @Override
     public void onErrorLoadingBills(Exception e) {
         e.printStackTrace();
+        getView().hideLoading();
         getView().showError(e.getMessage()); // TODO HANDLE THIS CORRECTLY
     }
 
     public BillListView getView() {
         return view;
+    }
+
+    @Override
+    public void onResumeView() {
+    }
+
+    @Override
+    public void onPauseView() {
     }
 }

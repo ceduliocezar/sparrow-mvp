@@ -4,15 +4,15 @@ import com.cedulio.sparrow.domain.executor.Executor;
 import com.cedulio.sparrow.domain.executor.MainThread;
 
 public abstract class AbstractAsyncUseCase implements AsyncUseCase {
-    protected Executor   mThreadExecutor;
-    protected MainThread mMainThread;
+    protected Executor threadExecutor;
+    protected MainThread mainThread;
 
     protected volatile boolean mIsCanceled;
     protected volatile boolean mIsRunning;
 
     public AbstractAsyncUseCase(Executor threadExecutor, MainThread mainThread) {
-        mThreadExecutor = threadExecutor;
-        mMainThread = mainThread;
+        this.threadExecutor = threadExecutor;
+        this.mainThread = mainThread;
     }
 
     public void cancel() {
@@ -32,8 +32,12 @@ public abstract class AbstractAsyncUseCase implements AsyncUseCase {
     public void execute() {
 
         this.mIsRunning = true;
-        mThreadExecutor.execute(this);
+        threadExecutor.execute(this);
     }
 
     public abstract void run();
+
+    public MainThread getMainThread() {
+        return mainThread;
+    }
 }

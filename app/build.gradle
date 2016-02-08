@@ -16,8 +16,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
     lintOptions {
         disable 'InvalidPackage'
     }
@@ -25,12 +23,13 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:design:23.0.1'
+    testCompile 'junit:junit:4.12'
     compile project(':domain')
     compile project(':data')
     compile 'com.beardedhen:androidbootstrap:2.0.1'
     compile 'com.jpardogo.materialtabstrip:library:1.1.0'
-    compile 'com.jakewharton:butterknife:7.0.1'
+
 }

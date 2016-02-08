@@ -18,7 +18,7 @@ public class LineItemEntityDataMapper {
             lineItem.setCharges(lineItemEntity.getCharges());
             lineItem.setHref(lineItemEntity.getHref());
             lineItem.setIndex(lineItemEntity.getIndex());
-            lineItemEntity.setPostDate(lineItemEntity.getPostDate());
+            lineItem.setPostDate(lineItemEntity.getPostDate());
             lineItem.setTitle(lineItemEntity.getTitle());
         }
 
