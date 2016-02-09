@@ -5,9 +5,9 @@ import com.cedulio.sparrow.bill.list.formatter.MonthFormatter;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;
-import com.cedulio.sparrow.domain.interactor.bill.formatter.LineItemDescriptionFormatter;
-import com.cedulio.sparrow.domain.interactor.bill.formatter.MonthExpensesFormatter;
-import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityManager;
+import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
+import com.cedulio.sparrow.domain.formatter.MonthExpensesFormatter;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.threading.MainThreadAndroid;
@@ -23,7 +23,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     private LineItemDescriptionFormatter mLineItemDescriptionFormatter;
 
-    private GerarBoletoVisibilityManager visibilityManagerGerarBoleto;
+    private GerarBoletoVisibilityChecker visibilityManagerGerarBoleto;
 
     private MonthExpensesFormatter mMonthExpensesFormatter;
 
@@ -89,7 +89,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         return mLineItemDescriptionFormatter;
     }
 
-    private GerarBoletoVisibilityManager getVisibilityManagerGerarBoleto() {
+    private GerarBoletoVisibilityChecker getVisibilityManagerGerarBoleto() {
         return visibilityManagerGerarBoleto;
     }
 

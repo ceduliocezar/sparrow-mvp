@@ -1,9 +1,8 @@
 package com.cedulio.sparrow.domain.interactor.bill.visibility;
 
 import com.cedulio.sparrow.domain.model.Bill;
-import com.cedulio.sparrow.domain.interactor.UseCase;
 
-public abstract class BillFieldVisibilityManager extends UseCase {
+public abstract class BillFieldVisibilityChecker {
 
     public abstract boolean mayShow(Bill bill);
 

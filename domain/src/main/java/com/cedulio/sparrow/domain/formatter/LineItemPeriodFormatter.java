@@ -1,10 +1,8 @@
-package com.cedulio.sparrow.bill.formatter;
+package com.cedulio.sparrow.domain.formatter;
 
 
-import com.cedulio.sparrow.R;
+import com.cedulio.sparrow.domain.i18n.FormatMessages;
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
-
-import android.content.Context;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,10 +10,11 @@ import java.util.Date;
 public class LineItemPeriodFormatter {
 
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("d MMM",
-            DefaultLocale.getInstance().getLocale());
+            DefaultLocale.getLocale());
 
-    public static String format(Date openDate, Date closeDate, Context context) {
-        String text = context.getResources().getString(R.string.line_items_period_header);
+    public static String format(Date openDate, Date closeDate) {
+
+        String text = FormatMessages.getString("LineItemsPeriodHeader");
 
         return String.format(text, dateFormatter.format(openDate.getTime()),
                 dateFormatter.format(closeDate).toString()).toUpperCase();

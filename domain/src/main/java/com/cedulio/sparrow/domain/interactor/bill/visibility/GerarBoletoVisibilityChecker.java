@@ -1,12 +1,11 @@
 package com.cedulio.sparrow.domain.interactor.bill.visibility;
 
 import com.cedulio.sparrow.domain.model.Bill;
-import com.cedulio.sparrow.domain.interactor.UseCase;
 
-public class GerarBoletoVisibilityManager extends UseCase {
+public class GerarBoletoVisibilityChecker extends BillFieldVisibilityChecker {
 
 
-    public GerarBoletoVisibilityManager() {
+    public GerarBoletoVisibilityChecker() {
 
     }
 

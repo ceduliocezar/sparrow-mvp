@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.bill.visibility;
 
 
-import com.cedulio.sparrow.domain.interactor.bill.visibility.BillFieldVisibilityManager;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.BillFieldVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import org.junit.Assert;
@@ -23,9 +23,9 @@ public class BillFieldVisibilityManagerTest {
 
         mockState(Bill.State.FUTURE);
 
-        BillFieldVisibilityManager billFieldVisibilityManager = createNewManager();
+        BillFieldVisibilityChecker billFieldVisibilityChecker = createNewManager();
 
-        boolean billClosed = billFieldVisibilityManager.isBillStateClosed(bill);
+        boolean billClosed = billFieldVisibilityChecker.isBillStateClosed(bill);
 
         Assert.assertFalse("State FUTURE should return false", billClosed);
     }
@@ -35,9 +35,9 @@ public class BillFieldVisibilityManagerTest {
 
         mockState(Bill.State.CLOSED);
 
-        BillFieldVisibilityManager billFieldVisibilityManager = createNewManager();
+        BillFieldVisibilityChecker billFieldVisibilityChecker = createNewManager();
 
-        boolean billClosed = billFieldVisibilityManager.isBillStateClosed(bill);
+        boolean billClosed = billFieldVisibilityChecker.isBillStateClosed(bill);
 
         Assert.assertTrue("State CLOSED should return true", billClosed);
 
@@ -48,16 +48,16 @@ public class BillFieldVisibilityManagerTest {
 
         mockState(Bill.State.OPEN);
 
-        BillFieldVisibilityManager billFieldVisibilityManager = createNewManager();
+        BillFieldVisibilityChecker billFieldVisibilityChecker = createNewManager();
 
-        boolean billClosed = billFieldVisibilityManager.isBillStateClosed(bill);
+        boolean billClosed = billFieldVisibilityChecker.isBillStateClosed(bill);
 
         Assert.assertFalse("State OPEN should return false", billClosed);
 
     }
 
-    private BillFieldVisibilityManager createNewManager() {
-        return new BillFieldVisibilityManager() {
+    private BillFieldVisibilityChecker createNewManager() {
+        return new BillFieldVisibilityChecker() {
             @Override
             public boolean mayShow(Bill bill) {
                 return false;

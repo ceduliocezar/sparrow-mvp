@@ -1,5 +1,10 @@
 package com.cedulio.mvp;
 
-public abstract class StateManager {
+import android.os.Bundle;
 
+public abstract class StateManager<T> {
+
+    public abstract Bundle saveState(T stateHolder);
+
+    public abstract T restoreState(Bundle savedState);
 }

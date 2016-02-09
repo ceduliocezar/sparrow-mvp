@@ -1,11 +1,9 @@
-package com.cedulio.sparrow.domain.interactor.bill;
-
-import com.cedulio.sparrow.domain.interactor.UseCase;
+package com.cedulio.sparrow.domain.formatter;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class CurrencyFormatter extends UseCase {
+public class CurrencyFormatter {
 
     public String format(double value, Locale locale) {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);

@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.domain.bill.visibility;
 
-import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityManager;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.Summary;
 
@@ -24,7 +24,7 @@ public class GerarBoletoVisibilityManagerTest {
     @Test
     public void testOverdueNegative() {
 
-        GerarBoletoVisibilityManager visibilityManager = new GerarBoletoVisibilityManager();
+        GerarBoletoVisibilityChecker visibilityManager = new GerarBoletoVisibilityChecker();
 
         mockState(Bill.State.OVERDUE);
         mockSummary();
@@ -39,7 +39,7 @@ public class GerarBoletoVisibilityManagerTest {
     @Test
     public void testOverduePositive() {
 
-        GerarBoletoVisibilityManager visibilityManager = new GerarBoletoVisibilityManager();
+        GerarBoletoVisibilityChecker visibilityManager = new GerarBoletoVisibilityChecker();
 
         mockState(Bill.State.OVERDUE);
         mockSummary();
@@ -54,7 +54,7 @@ public class GerarBoletoVisibilityManagerTest {
     @Test
     public void testClosed() {
 
-        GerarBoletoVisibilityManager visibilityManager = new GerarBoletoVisibilityManager();
+        GerarBoletoVisibilityChecker visibilityManager = new GerarBoletoVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
 
@@ -67,7 +67,7 @@ public class GerarBoletoVisibilityManagerTest {
     @Test
     public void testOpen() {
 
-        GerarBoletoVisibilityManager visibilityManager = new GerarBoletoVisibilityManager();
+        GerarBoletoVisibilityChecker visibilityManager = new GerarBoletoVisibilityChecker();
 
         mockState(Bill.State.OPEN);
 
@@ -79,7 +79,7 @@ public class GerarBoletoVisibilityManagerTest {
     @Test
     public void testFuture() {
 
-        GerarBoletoVisibilityManager visibilityManager = new GerarBoletoVisibilityManager();
+        GerarBoletoVisibilityChecker visibilityManager = new GerarBoletoVisibilityChecker();
 
         mockState(Bill.State.FUTURE);
 

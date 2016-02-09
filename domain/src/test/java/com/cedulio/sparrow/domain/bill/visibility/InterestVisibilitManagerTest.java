@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.domain.bill.visibility;
 
-import com.cedulio.sparrow.domain.interactor.bill.visibility.InterestVisibilityManager;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.InterestVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.Summary;
 
@@ -25,7 +25,7 @@ public class InterestVisibilitManagerTest {
     @Test
     public void testInterestNegative() {
 
-        InterestVisibilityManager visibilityManager = new InterestVisibilityManager();
+        InterestVisibilityChecker visibilityManager = new InterestVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -40,7 +40,7 @@ public class InterestVisibilitManagerTest {
     @Test
     public void testInterestPositive() {
 
-        InterestVisibilityManager visibilityManager = new InterestVisibilityManager();
+        InterestVisibilityChecker visibilityManager = new InterestVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -55,7 +55,7 @@ public class InterestVisibilitManagerTest {
     @Test
     public void testInterestZero() {
 
-        InterestVisibilityManager visibilityManager = new InterestVisibilityManager();
+        InterestVisibilityChecker visibilityManager = new InterestVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -69,7 +69,7 @@ public class InterestVisibilitManagerTest {
     @Test
     public void testNotClosed() {
 
-        InterestVisibilityManager visibilityManager = new InterestVisibilityManager();
+        InterestVisibilityChecker visibilityManager = new InterestVisibilityChecker();
 
         mockState(Bill.State.OPEN);
 

@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.domain.interactor.base;
 
 
-public interface AsyncUseCase {
+public interface UseCase {
     void execute();
 }

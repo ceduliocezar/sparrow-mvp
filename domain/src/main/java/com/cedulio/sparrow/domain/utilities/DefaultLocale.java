@@ -4,19 +4,9 @@ import java.util.Locale;
 
 public class DefaultLocale {
 
-    private static DefaultLocale INSTANCE = new DefaultLocale();
+    private static Locale locale = new Locale("pt", "BR");
 
-    private Locale locale = new Locale("pt", "BR");
-
-    private DefaultLocale() {
-
-    }
-
-    public static DefaultLocale getInstance() {
-        return INSTANCE;
-    }
-
-    public Locale getLocale() {
+    public static Locale getLocale() {
         return locale;
     }
 }

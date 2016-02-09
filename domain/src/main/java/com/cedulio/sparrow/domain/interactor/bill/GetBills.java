@@ -3,13 +3,13 @@ package com.cedulio.sparrow.domain.interactor.bill;
 
 import com.cedulio.sparrow.domain.executor.Executor;
 import com.cedulio.sparrow.domain.executor.MainThread;
-import com.cedulio.sparrow.domain.interactor.base.AbstractAsyncUseCase;
+import com.cedulio.sparrow.domain.interactor.base.AbstractUseCase;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.repository.BillRepository;
 
 import java.util.List;
 
-public class GetBills extends AbstractAsyncUseCase {
+public class GetBills extends AbstractUseCase {
 
     private CallBack callBack;
 

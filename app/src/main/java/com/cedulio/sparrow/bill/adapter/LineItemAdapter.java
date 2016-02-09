@@ -1,9 +1,9 @@
 package com.cedulio.sparrow.bill.adapter;
 
 import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.bill.formatter.LineItemAmountFormatter;
-import com.cedulio.sparrow.bill.formatter.CloseDateFormatter;
-import com.cedulio.sparrow.bill.formatter.PostDateFormatter;
+import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
+import com.cedulio.sparrow.domain.formatter.LineItemAmountFormatter;
+import com.cedulio.sparrow.domain.formatter.PostDateFormatter;
 import com.cedulio.sparrow.domain.model.LineItem;
 
 import android.content.Context;
@@ -18,15 +18,18 @@ import java.util.List;
 
 public class LineItemAdapter extends BaseAdapter {
 
-    private final LayoutInflater inflater;
+    private LayoutInflater inflater;
 
-    private final List<LineItem> items;
+    private List<LineItem> items;
+
+    private Callback callback;
 
     private CloseDateFormatter closeDateFormatter;
 
-    public LineItemAdapter(Context context, List<LineItem> items) {
-        this.inflater = LayoutInflater.from(context);
-        this.items = items;
+    public LineItemAdapter(Context context, List<LineItem> items, Callback callback) {
+        setInflater(LayoutInflater.from(context));
+        setItems(items);
+        setCallback(callback);
     }
 
 
@@ -68,7 +71,11 @@ public class LineItemAdapter extends BaseAdapter {
 
     private void setTitleText(int position, View convertView) {
         TextView titleTextView = (TextView) convertView.findViewById(R.id.lv_item__tv__title);
-        titleTextView.setText(items.get(position).getTitle());
+        titleTextView.setText(getLineItemTitleFormatted(position));
+    }
+
+    private String getLineItemTitleFormatted(int position) {
+        return getCallback().getLineItemTitleFormatted(items.get(position));
     }
 
     private void setPostDateText(int position, View convertView) {
@@ -108,5 +115,43 @@ public class LineItemAdapter extends BaseAdapter {
         } else {
             lineUp.setVisibility(View.VISIBLE);
         }
+    }
+
+    private Callback getCallback() {
+        return callback;
+    }
+
+    private void setCallback(Callback callback) {
+        this.callback = callback;
+    }
+
+    private LayoutInflater getInflater() {
+        return inflater;
+    }
+
+    private void setInflater(LayoutInflater inflater) {
+        this.inflater = inflater;
+    }
+
+    private List<LineItem> getItems() {
+        return items;
+    }
+
+    private void setItems(List<LineItem> items) {
+        this.items = items;
+    }
+
+    private CloseDateFormatter getCloseDateFormatter() {
+        return closeDateFormatter;
+    }
+
+    private void setCloseDateFormatter(
+            CloseDateFormatter closeDateFormatter) {
+        this.closeDateFormatter = closeDateFormatter;
+    }
+
+    public interface Callback {
+
+        String getLineItemTitleFormatted(LineItem lineItem);
     }
 }

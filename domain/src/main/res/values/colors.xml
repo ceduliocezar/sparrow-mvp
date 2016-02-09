@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <color name="bill_closed">#E5615C</color>
-    <color name="bill_overdue">#7ED321</color>
-    <color name="bill_open">#40AAB9</color>
-    <color name="bill_future">#F5A623</color>
-
-</resources>

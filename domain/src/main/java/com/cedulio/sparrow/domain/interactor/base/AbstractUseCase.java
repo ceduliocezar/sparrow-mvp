@@ -3,14 +3,14 @@ package com.cedulio.sparrow.domain.interactor.base;
 import com.cedulio.sparrow.domain.executor.Executor;
 import com.cedulio.sparrow.domain.executor.MainThread;
 
-public abstract class AbstractAsyncUseCase implements AsyncUseCase {
+public abstract class AbstractUseCase implements UseCase {
     protected Executor threadExecutor;
     protected MainThread mainThread;
 
     protected volatile boolean mIsCanceled;
     protected volatile boolean mIsRunning;
 
-    public AbstractAsyncUseCase(Executor threadExecutor, MainThread mainThread) {
+    public AbstractUseCase(Executor threadExecutor, MainThread mainThread) {
         this.threadExecutor = threadExecutor;
         this.mainThread = mainThread;
     }

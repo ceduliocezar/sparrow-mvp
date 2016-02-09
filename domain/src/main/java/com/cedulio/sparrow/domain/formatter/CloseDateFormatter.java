@@ -1,7 +1,7 @@
-package com.cedulio.sparrow.bill.formatter;
+package com.cedulio.sparrow.domain.formatter;
 
 
-import com.cedulio.sparrow.R;
+import com.cedulio.sparrow.domain.i18n.FormatMessages;
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
 
 import android.content.Context;
@@ -14,14 +14,14 @@ import java.util.GregorianCalendar;
 public class CloseDateFormatter {
 
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("d MMM",
-            DefaultLocale.getInstance().getLocale());
+            DefaultLocale.getLocale());
 
     private static SimpleDateFormat formatter = new SimpleDateFormat("MMM",
-            DefaultLocale.getInstance().getLocale());
+            DefaultLocale.getLocale());
 
-    public static String formatClose(Date closeDate, Context context) {
+    public static String formatClose(Date closeDate) {
 
-        String format = context.getString(R.string.close_date_format);
+        String format = FormatMessages.getString("CloseDateFormat");
 
         return String
                 .format(format, dateFormatter.format(closeDate.getTime()).toString().toUpperCase());
@@ -29,7 +29,7 @@ public class CloseDateFormatter {
 
     public static String formatClosing(Date closeDate, Context context) {
 
-        String format = context.getString(R.string.close_date_format_long);
+        String format = FormatMessages.getString("CloseDateFormatLong");
 
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(closeDate);

@@ -1,8 +1,10 @@
 package com.cedulio.sparrow.bill;
 
 import com.cedulio.mvp.Presenter;
-import com.cedulio.sparrow.domain.interactor.bill.CurrencyFormatter;
+import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
+import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
 import com.cedulio.sparrow.domain.model.Bill;
+import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
 
 public class BillPresenter extends Presenter {
@@ -13,10 +15,13 @@ public class BillPresenter extends Presenter {
 
     private CurrencyFormatter currencyFormatter;
 
+    private LineItemDescriptionFormatter lineItemDescriptionFormatter;
+
     public BillPresenter(BillView billView) {
         setBillView(billView);
         setBillStateHolder(new BillStateHolder());
         setCurrencyFormatter(new CurrencyFormatter());
+        setLineItemDescriptionFormatter(new LineItemDescriptionFormatter());
     }
 
     @Override
@@ -77,4 +82,20 @@ public class BillPresenter extends Presenter {
             CurrencyFormatter currencyFormatter) {
         this.currencyFormatter = currencyFormatter;
     }
+
+    private LineItemDescriptionFormatter getLineItemDescriptionFormatter() {
+        return lineItemDescriptionFormatter;
+    }
+
+    private void setLineItemDescriptionFormatter(
+            LineItemDescriptionFormatter lineItemDescriptionFormatter) {
+        this.lineItemDescriptionFormatter = lineItemDescriptionFormatter;
+    }
+
+    public String getLineItemTitleFormatted(LineItem line) {
+        return getLineItemDescriptionFormatter()
+                .format(line, getBillStateHolder().getBill().getState());
+    }
+
+
 }

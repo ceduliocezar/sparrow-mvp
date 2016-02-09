@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.utilities;
 
 
-import com.cedulio.sparrow.domain.interactor.bill.CurrencyFormatter;
+import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import org.junit.Assert;

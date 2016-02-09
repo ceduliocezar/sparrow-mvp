@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.executor.impl;
 
 import com.cedulio.sparrow.domain.executor.Executor;
-import com.cedulio.sparrow.domain.interactor.base.AbstractAsyncUseCase;
+import com.cedulio.sparrow.domain.interactor.base.AbstractUseCase;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -32,7 +32,7 @@ public class ThreadExecutor implements Executor {
     }
 
     @Override
-    public void execute(final AbstractAsyncUseCase interactor) {
+    public void execute(final AbstractUseCase interactor) {
         mThreadPoolExecutor.submit(new Runnable() {
             @Override
             public void run() {

@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.bill.visibility;
 
 
-import com.cedulio.sparrow.domain.interactor.bill.visibility.UnpaidValuesVisibilityManager;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.UnpaidValuesVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.Summary;
 
@@ -26,7 +26,7 @@ public class UnpaidValuesVisibilityManagerTest {
     @Test
     public void testPastBalanceNegative() {
 
-        UnpaidValuesVisibilityManager visibilityManager = new UnpaidValuesVisibilityManager();
+        UnpaidValuesVisibilityChecker visibilityManager = new UnpaidValuesVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -41,7 +41,7 @@ public class UnpaidValuesVisibilityManagerTest {
     @Test
     public void testPastBalancePositive() {
 
-        UnpaidValuesVisibilityManager visibilityManager = new UnpaidValuesVisibilityManager();
+        UnpaidValuesVisibilityChecker visibilityManager = new UnpaidValuesVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -56,7 +56,7 @@ public class UnpaidValuesVisibilityManagerTest {
     @Test
     public void testPastBalanceZero() {
 
-        UnpaidValuesVisibilityManager visibilityManager = new UnpaidValuesVisibilityManager();
+        UnpaidValuesVisibilityChecker visibilityManager = new UnpaidValuesVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -71,7 +71,7 @@ public class UnpaidValuesVisibilityManagerTest {
     @Test
     public void testNotClosed() {
 
-        UnpaidValuesVisibilityManager visibilityManager = new UnpaidValuesVisibilityManager();
+        UnpaidValuesVisibilityChecker visibilityManager = new UnpaidValuesVisibilityChecker();
 
         mockState(Bill.State.OPEN);
 

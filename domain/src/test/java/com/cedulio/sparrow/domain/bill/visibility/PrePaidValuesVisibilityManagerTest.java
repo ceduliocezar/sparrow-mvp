@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.bill.visibility;
 
 
-import com.cedulio.sparrow.domain.interactor.bill.visibility.PrePaidValuesVisibilityManager;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.PrePaidValuesVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.Summary;
 
@@ -26,7 +26,7 @@ public class PrePaidValuesVisibilityManagerTest {
     @Test
     public void testPastBalanceNegative() {
 
-        PrePaidValuesVisibilityManager visibilityManager = new PrePaidValuesVisibilityManager();
+        PrePaidValuesVisibilityChecker visibilityManager = new PrePaidValuesVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -42,7 +42,7 @@ public class PrePaidValuesVisibilityManagerTest {
     @Test
     public void testPastBalancePositive() {
 
-        PrePaidValuesVisibilityManager visibilityManager = new PrePaidValuesVisibilityManager();
+        PrePaidValuesVisibilityChecker visibilityManager = new PrePaidValuesVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -58,7 +58,7 @@ public class PrePaidValuesVisibilityManagerTest {
     @Test
     public void testPastBalanceZero() {
 
-        PrePaidValuesVisibilityManager visibilityManager = new PrePaidValuesVisibilityManager();
+        PrePaidValuesVisibilityChecker visibilityManager = new PrePaidValuesVisibilityChecker();
 
         mockState(Bill.State.CLOSED);
         mockSummary();
@@ -74,7 +74,7 @@ public class PrePaidValuesVisibilityManagerTest {
     @Test
     public void testNotClose() {
 
-        PrePaidValuesVisibilityManager visibilityManager = new PrePaidValuesVisibilityManager();
+        PrePaidValuesVisibilityChecker visibilityManager = new PrePaidValuesVisibilityChecker();
 
         mockState(Bill.State.OPEN);
 

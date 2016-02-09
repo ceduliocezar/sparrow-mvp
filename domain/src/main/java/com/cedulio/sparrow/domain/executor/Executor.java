@@ -1,11 +1,8 @@
 package com.cedulio.sparrow.domain.executor;
 
-import com.cedulio.sparrow.domain.interactor.base.AbstractAsyncUseCase;
+import com.cedulio.sparrow.domain.interactor.base.AbstractUseCase;
 
-/**
- * Created by cedulio on 07/02/16.
- */
 public interface Executor {
 
-    void execute(final AbstractAsyncUseCase interactor);
+    void execute(final AbstractUseCase interactor);
 }

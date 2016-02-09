@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.bill.formatter;
 
 
-import com.cedulio.sparrow.domain.interactor.bill.formatter.LineItemDescriptionFormatter;
+import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.R;

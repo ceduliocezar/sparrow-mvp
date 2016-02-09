@@ -1,9 +1,8 @@
 package com.cedulio.sparrow.domain.interactor.bill.visibility;
 
-
 import com.cedulio.sparrow.domain.model.Bill;
 
-public class UnpaidValuesVisibilityManager extends BillFieldVisibilityManager {
+public class PrePaidValuesVisibilityChecker extends BillFieldVisibilityChecker {
 
     public boolean mayShow(Bill bill) {
 
@@ -11,6 +10,6 @@ public class UnpaidValuesVisibilityManager extends BillFieldVisibilityManager {
             return false;
         }
 
-        return bill.getSummary().getPastBalance() > 0;
+        return bill.getSummary().getPastBalance() < 0;
     }
 }
