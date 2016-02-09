@@ -15,6 +15,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,8 +39,14 @@ public class BillListActivity extends AppCompatActivity
     @Bind(R.id.act_bill_list__tv__back)
     TextView iconBack;
 
+    @Bind(R.id.act_bill_list__tv__load_back)
+    TextView loadIconBack;
+
     @Bind(R.id.act_bill_list__tv)
     TriangleView triangleView;
+
+    @Bind(R.id.act_bill_list__ln__loader)
+    LinearLayout loadingLayout;
 
     private BillViewPagerAdapter mPagerAdapter;
 
@@ -66,6 +74,9 @@ public class BillListActivity extends AppCompatActivity
     private void initBackButton() {
         iconBack.setTypeface(getIconTypeFace());
         iconBack.setText(getBackIconString());
+
+        loadIconBack.setTypeface(getIconTypeFace());
+        loadIconBack.setText(getBackIconString());
     }
 
     private Typeface getIconTypeFace() {
@@ -117,16 +128,17 @@ public class BillListActivity extends AppCompatActivity
     @Override
     public void selectCurrentBillByPosition(int i) {
         viewPagerBills.setCurrentItem(i, true);
+        mPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showLoading() {
-        Log.d("debug", "showLoading");
+        loadingLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        Log.d("debug", "hideLoading");
+        loadingLayout.setVisibility(View.GONE);
     }
 
     @Override

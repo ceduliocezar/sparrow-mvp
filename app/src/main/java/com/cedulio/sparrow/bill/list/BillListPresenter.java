@@ -138,9 +138,8 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         getView().hideLoading();
 
         setViewModelBills(bills);
-        selectClosedBill(bills);
-
         renderBills(bills);
+        selectClosedBill(bills);
     }
 
     @Override

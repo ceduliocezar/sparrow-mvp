@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <integer-array name="progress_colors">
+        <item>@color/bill_overdue</item>
+        <item>@color/bill_closed</item>
+        <item>@color/bill_open</item>
+        <item>@color/bill_future</item>
+    </integer-array>
 </resources>
