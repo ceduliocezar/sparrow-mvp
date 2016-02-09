@@ -11,6 +11,8 @@ import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.model.Summary;
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
 
+import android.os.Bundle;
+
 import java.util.Date;
 
 public class BillPresenter extends Presenter {
@@ -37,7 +39,7 @@ public class BillPresenter extends Presenter {
     }
 
     @Override
-    public void onCreateView() {
+    public void onCreateView(Bundle savedInstanceState) {
         loadBill();
         renderView();
     }
@@ -63,6 +65,11 @@ public class BillPresenter extends Presenter {
 
     @Override
     public void onPauseView() {
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        //TODO TECBMCCS
     }
 
     private BillView getBillView() {

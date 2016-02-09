@@ -106,7 +106,7 @@ public class BillFragment extends Fragment implements BillView, LineItemAdapter.
 
         View view = inflateView(inflater, container);
         ButterKnife.bind(this, view);
-        getBillPresenter().onCreateView();
+        getBillPresenter().onCreateView(savedInstanceState);
         return view;
     }
 

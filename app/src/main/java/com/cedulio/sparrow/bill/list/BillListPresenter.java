@@ -1,16 +1,18 @@
 package com.cedulio.sparrow.bill.list;
 
 import com.cedulio.mvp.Presenter;
-import com.cedulio.sparrow.domain.formatter.MonthFormatter;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
-import com.cedulio.sparrow.domain.interactor.bill.GetBills;
 import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
 import com.cedulio.sparrow.domain.formatter.MonthExpensesFormatter;
+import com.cedulio.sparrow.domain.formatter.MonthFormatter;
+import com.cedulio.sparrow.domain.interactor.bill.GetBills;
 import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.threading.MainThreadAndroid;
+
+import android.os.Bundle;
 
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     private final BillListView view;
 
-    private BillListStateHolder viewModel;
+    private BillListStateHolder stateHolder;
+
+    private BillListStateManager stateManager;
 
     private LineItemDescriptionFormatter mLineItemDescriptionFormatter;
 
@@ -34,7 +38,8 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         this.getBills = new GetBills(new BillDataRepository(), this,
                 MainThreadAndroid.getInstance(), ThreadExecutor.getInstance());
 
-        this.viewModel = new BillListStateHolder();
+        setStateHolder(new BillListStateHolder());
+        setStateManager(new BillListStateManager());
     }
 
     private void loadData() {
@@ -49,7 +54,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
         int closedBillPosition = getClosedBillPosition(bills);
         getView().selectCurrentBillByPosition(closedBillPosition);
-        getViewModel().setCurrentBillSelected(bills.get(closedBillPosition));
+        getStateHolder().setCurrentBillSelected(bills.get(closedBillPosition));
     }
 
     private int getClosedBillPosition(List<Bill> bills) {
@@ -64,7 +69,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     private void setViewModelBills(List<Bill> bills) {
-        getViewModel().setBills(bills);
+        getStateHolder().setBills(bills);
     }
 
     public String getFormatedDescription(LineItem lineItem) {
@@ -73,16 +78,20 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     private Bill.State getStateFromCurrentBillSelected() {
-        return getViewModel().getCurrentBillSelected().getState();
+        return getStateHolder().getCurrentBillSelected().getState();
     }
 
     public boolean mayShowGerarBoleto() {
         return getVisibilityManagerGerarBoleto().mayShow(
-                getViewModel().getCurrentBillSelected());
+                getStateHolder().getCurrentBillSelected());
     }
 
-    private BillListStateHolder getViewModel() {
-        return viewModel;
+    private BillListStateHolder getStateHolder() {
+        return stateHolder;
+    }
+
+    private void setStateHolder(BillListStateHolder stateHolder) {
+        this.stateHolder = stateHolder;
     }
 
     private LineItemDescriptionFormatter getLineItemDescriptionFormatter() {
@@ -102,35 +111,47 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     public int getCountBills() {
-        return getViewModel().getBills().size();
+        return getStateHolder().getBills().size();
     }
 
     public String getPageTitle(int position) {
         return MonthFormatter
-                .format(getViewModel().getBills().get(position).getSummary().getCloseDate());
+                .format(getStateHolder().getBills().get(position).getSummary().getCloseDate());
     }
 
     private void updateView() {
         // TODO
     }
 
-    public void onCreateView() {
+    public void onCreateView(Bundle savedInstanceState) {
 
-        if (getViewModel().isLoaded()) {
-            updateView();
-        } else {
-            getView().showLoading();
-            loadData();
+        if (getStateHolder().isLoaded()) {
+            loadPreviousState(savedInstanceState);
         }
+
+        showLoading();
+        loadData();
+    }
+
+    private void showLoading() {
+        getView().showLoading();
+    }
+
+    private void loadPreviousState(Bundle savedInstanceState) {
+        setStateHolder(getStateManager().restoreState(savedInstanceState));
+    }
+
+    private boolean hasPreviousState(Bundle savedInstanceState) {
+        return savedInstanceState != null;
     }
 
     public Bill getBill(int position) {
-        return viewModel.getBills().get(position);
+        return getStateHolder().getBills().get(position);
     }
 
     public void onPageSelected(int position) {
-        getViewModel().setBillSelectedPosition(position);
-        getView().updateViews(getViewModel().getBills().get(position));
+        getStateHolder().setBillSelectedPosition(position);
+        getView().updateViews(getStateHolder().getBills().get(position));
     }
 
     @Override
@@ -139,7 +160,16 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
         setViewModelBills(bills);
         renderBills(bills);
+
+        if (!hasPreviousSelectedBill(bills)) {
+            getView().selectCurrentBillByPosition(getStateHolder().getBillSelectedPosition());
+        }
         selectClosedBill(bills);
+    }
+
+    private boolean hasPreviousSelectedBill(List<Bill> bills) {
+        return getStateHolder().getBillSelectedPosition()
+                != BillListStateHolder.BILL_INDEX_NOT_SELECTED;
     }
 
     @Override
@@ -159,5 +189,18 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     @Override
     public void onPauseView() {
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        getStateManager().saveState(getStateHolder());
+    }
+
+    private BillListStateManager getStateManager() {
+        return stateManager;
+    }
+
+    private void setStateManager(BillListStateManager stateManager) {
+        this.stateManager = stateManager;
     }
 }

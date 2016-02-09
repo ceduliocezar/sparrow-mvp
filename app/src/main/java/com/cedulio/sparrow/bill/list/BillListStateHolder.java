@@ -8,10 +8,13 @@ import java.util.List;
 
 public class BillListStateHolder extends StateHolder {
 
+    public static final int BILL_INDEX_NOT_SELECTED = -1;
+
     private List<Bill> bills = new ArrayList<>();
 
     private Bill currentBillSelected;
-    private int billSelectedPosition;
+
+    private int billSelectedPosition = BILL_INDEX_NOT_SELECTED;
 
     public List<Bill> getBills() {
         return bills;
@@ -29,11 +32,11 @@ public class BillListStateHolder extends StateHolder {
         this.currentBillSelected = currentBillSelected;
     }
 
-    public void setBillSelectedPosition(int billSelectedPosition) {
-        this.billSelectedPosition = billSelectedPosition;
-    }
-
     public int getBillSelectedPosition() {
         return billSelectedPosition;
+    }
+
+    public void setBillSelectedPosition(int billSelectedPosition) {
+        this.billSelectedPosition = billSelectedPosition;
     }
 }

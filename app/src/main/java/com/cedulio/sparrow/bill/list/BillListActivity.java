@@ -64,7 +64,7 @@ public class BillListActivity extends AppCompatActivity
         initBackButton();
         setTabsListener();
 
-        getBillListPresenter().onCreateView();
+        getBillListPresenter().onCreateView(savedInstanceState);
     }
 
     private void setTabsListener() {
@@ -193,5 +193,11 @@ public class BillListActivity extends AppCompatActivity
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getBillListPresenter().onSaveInstanceState(outState);
     }
 }
