@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.bill.list;
 
 import com.cedulio.mvp.Presenter;
-import com.cedulio.sparrow.bill.list.formatter.MonthFormatter;
+import com.cedulio.sparrow.domain.formatter.MonthFormatter;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;

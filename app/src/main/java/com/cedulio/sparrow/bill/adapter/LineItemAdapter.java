@@ -2,7 +2,7 @@ package com.cedulio.sparrow.bill.adapter;
 
 import com.cedulio.sparrow.R;
 import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
-import com.cedulio.sparrow.domain.formatter.LineItemAmountFormatter;
+import com.cedulio.sparrow.domain.formatter.LineItemValueFormatter;
 import com.cedulio.sparrow.domain.formatter.PostDateFormatter;
 import com.cedulio.sparrow.domain.model.LineItem;
 
@@ -66,7 +66,7 @@ public class LineItemAdapter extends BaseAdapter {
 
     private void setValueText(int position, View convertView) {
         TextView valueTextView = (TextView) convertView.findViewById(R.id.lv_item__tv__value);
-        valueTextView.setText(LineItemAmountFormatter.format(items.get(position).getAmount()));
+        valueTextView.setText(LineItemValueFormatter.format(items.get(position).getAmount()));
     }
 
     private void setTitleText(int position, View convertView) {

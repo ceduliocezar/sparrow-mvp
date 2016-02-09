@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.formatter;
 
 
-import com.cedulio.sparrow.domain.i18n.FormatMessages;
+import com.cedulio.sparrow.domain.R;
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
 
 import android.content.Context;
@@ -19,17 +19,18 @@ public class CloseDateFormatter {
     private static SimpleDateFormat formatter = new SimpleDateFormat("MMM",
             DefaultLocale.getLocale());
 
-    public static String formatClose(Date closeDate) {
 
-        String format = FormatMessages.getString("CloseDateFormat");
+    public String formatClose(Date closeDate, Context context) {
+
+        String format = context.getString(R.string.close_date_format);
 
         return String
                 .format(format, dateFormatter.format(closeDate.getTime()).toString().toUpperCase());
     }
 
-    public static String formatClosing(Date closeDate, Context context) {
+    public String formatClosing(Date closeDate, Context context) {
 
-        String format = FormatMessages.getString("CloseDateFormatLong");
+        String format = context.getString(R.string.close_date_format_long);
 
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(closeDate);
@@ -38,7 +39,7 @@ public class CloseDateFormatter {
                 closeDate.getTime()).toString().toUpperCase());
     }
 
-    public static String format(Date closeDate, Context context) {
+    public String format(Date closeDate, Context context) {
         return dateFormatter.format(closeDate.getTime()).toString().toUpperCase();
     }
 

@@ -1,11 +1,17 @@
 package com.cedulio.sparrow.bill;
 
 import com.cedulio.mvp.Presenter;
+import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
 import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
 import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
+import com.cedulio.sparrow.domain.formatter.SummaryPeriodFormatter;
+import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
+import com.cedulio.sparrow.domain.model.Summary;
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
+
+import java.util.Date;
 
 public class BillPresenter extends Presenter {
 
@@ -17,11 +23,17 @@ public class BillPresenter extends Presenter {
 
     private LineItemDescriptionFormatter lineItemDescriptionFormatter;
 
+    private CloseDateFormatter closeDateFormatter;
+
+    private SummaryPeriodFormatter summaryPeriodFormatter;
+
     public BillPresenter(BillView billView) {
         setBillView(billView);
         setBillStateHolder(new BillStateHolder());
         setCurrencyFormatter(new CurrencyFormatter());
         setLineItemDescriptionFormatter(new LineItemDescriptionFormatter());
+        setCloseDateFormatter(new CloseDateFormatter());
+        setSummaryPeriodFormatter(new SummaryPeriodFormatter());
     }
 
     @Override
@@ -71,7 +83,7 @@ public class BillPresenter extends Presenter {
 
     public String formatCurrencyValue(double value) {
         return getCurrencyFormatter()
-                .format(value, DefaultLocale.getInstance().getLocale());
+                .format(value, DefaultLocale.getLocale());
     }
 
     private CurrencyFormatter getCurrencyFormatter() {
@@ -98,4 +110,37 @@ public class BillPresenter extends Presenter {
     }
 
 
+    public String getCloseDateFormatted(Date closeDate) {
+        return getCloseDateFormatter().formatClose(closeDate, getBillView().getContext());
+    }
+
+    private CloseDateFormatter getCloseDateFormatter() {
+        return closeDateFormatter;
+    }
+
+    private void setCloseDateFormatter(
+            CloseDateFormatter closeDateFormatter) {
+        this.closeDateFormatter = closeDateFormatter;
+    }
+
+    public String getCloseDateFormatLong(Date closeDate) {
+        return getCloseDateFormatter().formatClosing(closeDate, getBillView().getContext());
+    }
+
+    public boolean mayShowGerarBoleto(Bill.State state) {
+        return new GerarBoletoVisibilityChecker().mayShow(getBillStateHolder().getBill());
+    }
+
+    public String getSummaryPeriodFormatted(Summary summary) {
+        return getSummaryPeriodFormatter()
+                .format(summary.getOpenDate(), summary.getCloseDate(), getBillView().getContext());
+    }
+
+    private SummaryPeriodFormatter getSummaryPeriodFormatter() {
+        return summaryPeriodFormatter;
+    }
+
+    private void setSummaryPeriodFormatter(SummaryPeriodFormatter summaryPeriodFormatter) {
+        this.summaryPeriodFormatter = summaryPeriodFormatter;
+    }
 }

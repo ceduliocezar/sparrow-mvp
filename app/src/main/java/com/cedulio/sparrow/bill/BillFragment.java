@@ -5,13 +5,13 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.api.defaults.DefaultBootstrapBrand;
 import com.cedulio.sparrow.R;
 import com.cedulio.sparrow.bill.adapter.LineItemAdapter;
-import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
-import com.cedulio.sparrow.domain.formatter.LineItemPeriodFormatter;
 import com.cedulio.sparrow.bill.list.utilities.BillColorSelector;
 import com.cedulio.sparrow.domain.model.Bill;
+import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.model.Summary;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,7 +28,7 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class BillFragment extends Fragment implements BillView {
+public class BillFragment extends Fragment implements BillView, LineItemAdapter.Callback {
 
     private static final String BILL_TAG = "BILL_TAG";
 
@@ -123,7 +123,7 @@ public class BillFragment extends Fragment implements BillView {
     }
 
     private void setLineItens(Bill bill) {
-        lineItensListView.setAdapter(new LineItemAdapter(getContext(), bill.getLineItems()));
+        lineItensListView.setAdapter(new LineItemAdapter(getContext(), bill.getLineItems(), this));
     }
 
     @Override
@@ -138,23 +138,36 @@ public class BillFragment extends Fragment implements BillView {
 
     private void initHeader(Bill bill) {
         setBackgroundColor(bill.getState());
+
+        setText(bill);
+        setVisibility(bill);
+    }
+
+    private void setText(Bill bill) {
         setTotalBalanceText(bill.getSummary().getTotalBalance());
         setCloseDateText(bill.getSummary().getCloseDate());
         setPaidText(bill.getSummary().getPaid());
-        setPaidVisibility(bill.getState());
-        setClosedInformationVisibility(bill.getState());
         setClosedInformations(bill.getSummary(), bill.getState());
-        setButtonGerarBoletoVisibility(bill.getState());
         setButtonGerarBoletoColor(bill.getState());
-        setAdditionalInformationVisibility(bill.getState());
         setAdditionalInformationText(bill);
-        setSubHeaderVisibility(bill.getState());
         setLineItemsPeriodText(bill.getSummary());
     }
 
+    private void setVisibility(Bill bill) {
+        setPaidVisibility(bill.getState());
+        setClosedInformationVisibility(bill.getState());
+        setAdditionalInformationVisibility(bill.getState());
+        setSubHeaderVisibility(bill.getState());
+        setButtonGerarBoletoVisibility(bill.getState());
+    }
+
     private void setLineItemsPeriodText(Summary summary) {
-        periodLineItemsTextView.setText(LineItemPeriodFormatter
-                .format(summary.getOpenDate(), summary.getCloseDate(), getContext()));
+        periodLineItemsTextView.setText(getSummaryPeriodFormatted(summary));
+    }
+
+    @NonNull
+    private String getSummaryPeriodFormatted(Summary summary) {
+        return getBillPresenter().getSummaryPeriodFormatted(summary);
     }
 
     private void setSubHeaderVisibility(Bill.State state) {
@@ -200,15 +213,24 @@ public class BillFragment extends Fragment implements BillView {
 
     private void setLongCloseDateText(Date closeDate) {
         additionalInformationTextView
-                .setText(CloseDateFormatter.formatClosing(closeDate, getContext()));
+                .setText(getCloseDateFormatLong(closeDate));
+    }
+
+    private String getCloseDateFormatLong(Date closeDate) {
+        return getBillPresenter().getCloseDateFormatLong(closeDate);
     }
 
     private void setButtonGerarBoletoVisibility(Bill.State state) {
-        if (isClosed(state) || isOpen(state)) {
+
+        if (mayShowGerarBoleto(state)) {
             gerarBoletoButton.setVisibility(View.VISIBLE);
         } else {
             gerarBoletoButton.setVisibility(View.GONE);
         }
+    }
+
+    private boolean mayShowGerarBoleto(Bill.State state) {
+        return getBillPresenter().mayShowGerarBoleto(state);
     }
 
     private boolean isOpen(Bill.State state) {
@@ -269,7 +291,11 @@ public class BillFragment extends Fragment implements BillView {
     }
 
     private void setCloseDateText(Date closeDate) {
-        closeDateTextView.setText(CloseDateFormatter.formatClose(closeDate, getContext()));
+        closeDateTextView.setText(getCloseDateFormatted(closeDate));
+    }
+
+    private String getCloseDateFormatted(Date closeDate) {
+        return getBillPresenter().getCloseDateFormatted(closeDate);
     }
 
     private void setTotalBalanceText(double totalBalance) {
@@ -298,5 +324,8 @@ public class BillFragment extends Fragment implements BillView {
         this.billPresenter = billPresenter;
     }
 
-
+    @Override
+    public String getLineItemTitleFormatted(LineItem lineItem) {
+        return getBillPresenter().getLineItemTitleFormatted(lineItem);
+    }
 }

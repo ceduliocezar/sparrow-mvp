@@ -1,6 +1,5 @@
 package com.cedulio.sparrow.domain.formatter;
 
-import com.cedulio.sparrow.domain.i18n.FormatMessages;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 
@@ -21,7 +20,7 @@ public class LineItemDescriptionFormatter {
 
     private String getDescriptionWithCharges(LineItem lineItem) {
 
-        String rawString = FormatMessages.getString("LineItemDescriptionWithCharges");
+        String rawString = "%s %d/%d";
 
         return String.format(rawString, lineItem.getTitle(), lineItem.getIndex(),
                 lineItem.getCharges());

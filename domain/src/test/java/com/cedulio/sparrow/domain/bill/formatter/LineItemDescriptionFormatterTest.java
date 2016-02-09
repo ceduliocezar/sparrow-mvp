@@ -21,9 +21,6 @@ import static org.mockito.Mockito.when;
 public class LineItemDescriptionFormatterTest {
 
     @Mock
-    private Context mContext;
-
-    @Mock
     private LineItem mLineItem;
 
     @Test
@@ -34,7 +31,7 @@ public class LineItemDescriptionFormatterTest {
         String mockedTitle = "Futurama Guaicurus";
         mockTitle(mockedTitle);
 
-        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter();
 
         String formattedDescription = formatter.format(mLineItem, state);
 
@@ -53,7 +50,7 @@ public class LineItemDescriptionFormatterTest {
         long charges = 0;
         mockTotalCharges(charges);
 
-        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter();
 
         String formattedDescription = formatter.format(mLineItem, state);
 
@@ -76,9 +73,8 @@ public class LineItemDescriptionFormatterTest {
         mockIndex(index);
 
         String stringFormat = "%s %d/%d";
-        mockStringMessage(stringFormat);
 
-        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter();
 
         String formattedDescription = formatter.format(mLineItem, state);
 
@@ -103,9 +99,8 @@ public class LineItemDescriptionFormatterTest {
         mockIndex(index);
 
         String stringFormat = "%s %d/%d";
-        mockStringMessage(stringFormat);
 
-        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter(mContext);
+        LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter();
 
         String formattedDescription = formatter.format(mLineItem, state);
 
@@ -117,9 +112,6 @@ public class LineItemDescriptionFormatterTest {
                 formattedDescription.equals(string));
     }
 
-    private void mockStringMessage(String stringFormat) {
-        when(mContext.getString(R.string.bill_transaction_description)).thenReturn(stringFormat);
-    }
 
     private void mockIndex(long index) {
         when(mLineItem.getIndex()).thenReturn(index);

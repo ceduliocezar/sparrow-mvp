@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.bill.list.formatter;
+package com.cedulio.sparrow.domain.formatter;
 
 
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
@@ -9,9 +9,9 @@ import java.util.Date;
 public class MonthFormatter {
 
     private static SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM",
-            DefaultLocale.getInstance().getLocale());
+            DefaultLocale.getLocale());
 
     public static String format(Date date) {
-        return dateFormatter.format(date).toUpperCase(DefaultLocale.getInstance().getLocale());
+        return dateFormatter.format(date).toUpperCase(DefaultLocale.getLocale());
     }
 }

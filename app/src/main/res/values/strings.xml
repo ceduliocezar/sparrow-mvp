@@ -1,14 +1,11 @@
 <resources>
     <string name="app_name">Sparrow</string>
-    <string formatted="false" name="close_date_format">Vencimento %s</string>
-    <string formatted="false" name="close_date_format_long">FECHAMENTO EM %d DE %s</string>
+
     <string name="unpaid_values">Valores não pagos</string>
     <string name="parcial_billing">FATURA PARCIAL</string>
     <string name="interest_label">Juros 7,75%</string>
     <string name="month_expenses">Gastos do mês</string>
     <string name="paid">PAGAMENTO RECEBIDO</string>
     <string name="gerar_boleto">GERAR BOLETO</string>
-    <string formatted="false" name="line_items_period_header">DE %s ATÉ %s</string>
-    <string name="line_items_value_header">VALORES EM R$</string>
 
 </resources>

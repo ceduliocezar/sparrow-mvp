@@ -38,7 +38,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="42dp"
+                    android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/white_title_shadow_left">
 
@@ -46,7 +46,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#FFF"
-                        android:paddingRight="20dp">
+                        android:paddingRight="30dp">
 
                         <TextView
                             android:id="@+id/act_bill_list__tv__back"
@@ -65,7 +65,7 @@
                     android:id="@+id/act_bill_list__ln__shadow_right"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="42dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/white_title_shadow_right"
                     android:orientation="vertical" />
