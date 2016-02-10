@@ -12,8 +12,6 @@ public class BillListStateHolder extends StateHolder {
 
     private List<Bill> bills = new ArrayList<>();
 
-    private Bill currentBillSelected;
-
     private int billSelectedPosition = BILL_INDEX_NOT_SELECTED;
 
     public List<Bill> getBills() {
@@ -22,14 +20,6 @@ public class BillListStateHolder extends StateHolder {
 
     public void setBills(List<Bill> bills) {
         this.bills = bills;
-    }
-
-    public Bill getCurrentBillSelected() {
-        return currentBillSelected;
-    }
-
-    public void setCurrentBillSelected(Bill currentBillSelected) {
-        this.currentBillSelected = currentBillSelected;
     }
 
     public int getBillSelectedPosition() {

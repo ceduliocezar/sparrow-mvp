@@ -9,7 +9,5 @@ public interface BillListView extends LoadDataView {
 
     void renderBillList(List<Bill> bills);
 
-    void updateViews(Bill bill);
-
-    void selectCurrentBillByPosition(int i);
+    void renderBillSelected(Bill bill, int billSelectedPosition);
 }

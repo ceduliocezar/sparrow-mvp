@@ -30,6 +30,8 @@ public class BillListActivity extends AppCompatActivity
         ViewPager.OnPageChangeListener {
 
 
+    private static final String FONT_NAME = "icomoon.ttf";
+
     @Bind(R.id.act_bill_list__vp)
     ViewPager viewPagerBills;
 
@@ -80,7 +82,7 @@ public class BillListActivity extends AppCompatActivity
     }
 
     private Typeface getIconTypeFace() {
-        return Typeface.createFromAsset(getAssets(), "icomoon.ttf");
+        return Typeface.createFromAsset(getAssets(), FONT_NAME);
     }
 
     @NonNull
@@ -118,16 +120,20 @@ public class BillListActivity extends AppCompatActivity
         iconBack.setTextColor(idColor);
     }
 
-    @Override
-    public void updateViews(Bill bill) {
+    private void updateViewColor(Bill bill) {
         int idColor = BillColorSelector.getColor(bill.getState(), this);
         triangleView.setColor(idColor);
         setIconBackColor(idColor);
     }
 
     @Override
-    public void selectCurrentBillByPosition(int i) {
-        viewPagerBills.setCurrentItem(i, true);
+    public void renderBillSelected(Bill bill, int billSelectedPosition) {
+        updateViewPagerSelection(billSelectedPosition);
+        updateViewColor(bill);
+    }
+
+    private void updateViewPagerSelection(int billSelectedPosition) {
+        viewPagerBills.setCurrentItem(billSelectedPosition, true);
         mPagerAdapter.notifyDataSetChanged();
     }
 

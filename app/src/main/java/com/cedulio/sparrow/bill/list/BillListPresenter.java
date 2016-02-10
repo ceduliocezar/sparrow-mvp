@@ -3,13 +3,9 @@ package com.cedulio.sparrow.bill.list;
 import com.cedulio.mvp.Presenter;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
-import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
-import com.cedulio.sparrow.domain.formatter.MonthExpensesFormatter;
 import com.cedulio.sparrow.domain.formatter.MonthFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;
-import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
-import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.threading.MainThreadAndroid;
 
 import android.os.Bundle;
@@ -52,9 +48,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         List<Bill> bills = getStateHolder().getBills();
 
         int closedBillPosition = getClosedBillPosition(bills);
-        selectCurrentBillByPosition(closedBillPosition);
-        getStateHolder()
-                .setCurrentBillSelected(getStateHolder().getBills().get(closedBillPosition));
+        getStateHolder().setBillSelectedPosition(closedBillPosition);
     }
 
     private int getClosedBillPosition(List<Bill> bills) {
@@ -85,9 +79,9 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     public String getPageTitle(int position) {
-        return MonthFormatter
-                .format(getStateHolder().getBills().get(position).getSummary().getCloseDate());
+        return MonthFormatter.format(getBill(position).getSummary().getCloseDate());
     }
+
     public void onCreateView(Bundle savedInstanceState) {
 
         if (hasPreviousState(savedInstanceState)) {
@@ -117,13 +111,16 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     public void onPageSelected(int position) {
         getStateHolder().setBillSelectedPosition(position);
-        getView().updateViews(getStateHolder().getBills().get(position));
+        renderBillSelected();
     }
 
     @Override
     public void onLoadBills(List<Bill> bills) {
         hideLoading();
+
         setViewModelBills(bills);
+        selectClosedBill();
+
         renderCurrentState();
     }
 
@@ -133,19 +130,19 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     private void renderCurrentState() {
         renderBills();
-
-        if (!hasPreviousSelectedBill()) {
-            selectCurrentBillByPosition(getStateHolder().getBillSelectedPosition());
-        } else {
-            selectClosedBill();
+        if(hasSelectedBill()){
+            renderBillSelected();
         }
     }
 
-    private void selectCurrentBillByPosition(int billSelectedPosition) {
-        getView().selectCurrentBillByPosition(billSelectedPosition);
+    private void renderBillSelected() {
+        int billSelectedPosition = getStateHolder().getBillSelectedPosition();
+        Bill billSelected = getBill(billSelectedPosition);
+
+        getView().renderBillSelected(billSelected, billSelectedPosition);
     }
 
-    private boolean hasPreviousSelectedBill() {
+    private boolean hasSelectedBill() {
         return getStateHolder().getBillSelectedPosition()
                 != BillListStateHolder.BILL_INDEX_NOT_SELECTED;
     }
