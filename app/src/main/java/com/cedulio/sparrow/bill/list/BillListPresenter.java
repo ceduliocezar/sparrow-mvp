@@ -19,42 +19,42 @@ import java.util.List;
 
 public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
-    private final BillListView view;
+    private BillListView view;
 
     private BillListStateHolder stateHolder;
 
     private BillListStateManager stateManager;
 
-    private LineItemDescriptionFormatter mLineItemDescriptionFormatter;
-
-    private GerarBoletoVisibilityChecker visibilityManagerGerarBoleto;
-
-    private MonthExpensesFormatter mMonthExpensesFormatter;
-
     private GetBills getBills;
 
     public BillListPresenter(BillListView view) {
-        this.view = view;
-        this.getBills = new GetBills(new BillDataRepository(), this,
-                MainThreadAndroid.getInstance(), ThreadExecutor.getInstance());
-
+        setView(view);
+        initUseCaseGetBills();
         setStateHolder(new BillListStateHolder());
         setStateManager(new BillListStateManager());
     }
 
-    private void loadData() {
+    private void initUseCaseGetBills() {
+        this.getBills = new GetBills(new BillDataRepository(), this,
+                MainThreadAndroid.getInstance(), ThreadExecutor.getInstance());
+    }
+
+    private void loadDataFromDomain() {
         getBills.execute();
     }
 
-    private void renderBills(List<Bill> bills) {
-        getView().renderBillList(bills);
+    private void renderBills() {
+        getView().renderBillList(getStateHolder().getBills());
     }
 
-    private void selectClosedBill(List<Bill> bills) {
+    private void selectClosedBill() {
+
+        List<Bill> bills = getStateHolder().getBills();
 
         int closedBillPosition = getClosedBillPosition(bills);
-        getView().selectCurrentBillByPosition(closedBillPosition);
-        getStateHolder().setCurrentBillSelected(bills.get(closedBillPosition));
+        selectCurrentBillByPosition(closedBillPosition);
+        getStateHolder()
+                .setCurrentBillSelected(getStateHolder().getBills().get(closedBillPosition));
     }
 
     private int getClosedBillPosition(List<Bill> bills) {
@@ -72,42 +72,12 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         getStateHolder().setBills(bills);
     }
 
-    public String getFormatedDescription(LineItem lineItem) {
-        return getLineItemDescriptionFormatter().format(lineItem,
-                getStateFromCurrentBillSelected());
-    }
-
-    private Bill.State getStateFromCurrentBillSelected() {
-        return getStateHolder().getCurrentBillSelected().getState();
-    }
-
-    public boolean mayShowGerarBoleto() {
-        return getVisibilityManagerGerarBoleto().mayShow(
-                getStateHolder().getCurrentBillSelected());
-    }
-
     private BillListStateHolder getStateHolder() {
         return stateHolder;
     }
 
     private void setStateHolder(BillListStateHolder stateHolder) {
         this.stateHolder = stateHolder;
-    }
-
-    private LineItemDescriptionFormatter getLineItemDescriptionFormatter() {
-        return mLineItemDescriptionFormatter;
-    }
-
-    private GerarBoletoVisibilityChecker getVisibilityManagerGerarBoleto() {
-        return visibilityManagerGerarBoleto;
-    }
-
-    public String formatMonthExpenses(double monthExpenses) {
-        return getMonthExpensesFormatter().format(monthExpenses);
-    }
-
-    private MonthExpensesFormatter getMonthExpensesFormatter() {
-        return mMonthExpensesFormatter;
     }
 
     public int getCountBills() {
@@ -118,19 +88,15 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         return MonthFormatter
                 .format(getStateHolder().getBills().get(position).getSummary().getCloseDate());
     }
-
-    private void updateView() {
-        // TODO
-    }
-
     public void onCreateView(Bundle savedInstanceState) {
 
-        if (getStateHolder().isLoaded()) {
+        if (hasPreviousState(savedInstanceState)) {
             loadPreviousState(savedInstanceState);
+            renderCurrentState();
+        } else {
+            showLoading();
+            loadDataFromDomain();
         }
-
-        showLoading();
-        loadData();
     }
 
     private void showLoading() {
@@ -156,31 +122,50 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     @Override
     public void onLoadBills(List<Bill> bills) {
-        getView().hideLoading();
-
+        hideLoading();
         setViewModelBills(bills);
-        renderBills(bills);
-
-        if (!hasPreviousSelectedBill(bills)) {
-            getView().selectCurrentBillByPosition(getStateHolder().getBillSelectedPosition());
-        }
-        selectClosedBill(bills);
+        renderCurrentState();
     }
 
-    private boolean hasPreviousSelectedBill(List<Bill> bills) {
+    private void hideLoading() {
+        getView().hideLoading();
+    }
+
+    private void renderCurrentState() {
+        renderBills();
+
+        if (!hasPreviousSelectedBill()) {
+            selectCurrentBillByPosition(getStateHolder().getBillSelectedPosition());
+        } else {
+            selectClosedBill();
+        }
+    }
+
+    private void selectCurrentBillByPosition(int billSelectedPosition) {
+        getView().selectCurrentBillByPosition(billSelectedPosition);
+    }
+
+    private boolean hasPreviousSelectedBill() {
         return getStateHolder().getBillSelectedPosition()
                 != BillListStateHolder.BILL_INDEX_NOT_SELECTED;
     }
 
     @Override
     public void onErrorLoadingBills(Exception e) {
-        e.printStackTrace();
-        getView().hideLoading();
-        getView().showError(e.getMessage()); // TODO HANDLE THIS CORRECTLY
+        hideLoading();
+        showError(e);
+    }
+
+    private void showError(Exception e) {
+        getView().showError(e.getMessage());
     }
 
     public BillListView getView() {
         return view;
+    }
+
+    public void setView(BillListView view) {
+        this.view = view;
     }
 
     @Override
@@ -193,7 +178,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        getStateManager().saveState(getStateHolder());
+        getStateManager().saveState(getStateHolder(), outState);
     }
 
     private BillListStateManager getStateManager() {

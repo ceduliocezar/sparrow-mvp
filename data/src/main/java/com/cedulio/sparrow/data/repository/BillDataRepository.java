@@ -28,34 +28,16 @@ public class BillDataRepository implements BillRepository {
     @Override
     public List<Bill> getBills() throws IOException {
 
-        List<Bill> bills = null;
-
-        if (isCacheValid()) {
-            bills = getBillsLocal();
-        } else {
-            bills = getBillsCloud();
-        }
+        List<Bill> bills = getBillsCloud();
 
         return bills;
     }
 
     private List<Bill> getBillsCloud() throws IOException {
 
-        Log.d("debug","getCloud");
         BillDataStore dataStore = BillDataStoreFactory.getInstance().createCloudDataStore();
 
         return mapper.transform(dataStore.getBills());
-    }
-
-    private List<Bill> getBillsLocal() throws IOException {
-        Log.d("debug","getLocal");
-        BillDataStore dataStore = BillDataStoreFactory.getInstance().createCloudDataStore();
-
-        return mapper.transform(dataStore.getBills());
-    }
-
-    private boolean isCacheValid() {
-        return cacheManager.isCacheValid();
     }
 
     @Override

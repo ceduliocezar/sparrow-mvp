@@ -1,20 +1,27 @@
 package com.cedulio.sparrow.bill.list;
 
 import com.cedulio.mvp.StateManager;
+import com.cedulio.sparrow.domain.model.Bill;
 
 import android.os.Bundle;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class BillListStateManager extends StateManager<BillListStateHolder> {
 
 
     private static final String BILL_SELECTED_POSITION = "BILL_SELECTED_POSITION";
 
-    @Override
-    public Bundle saveState(BillListStateHolder stateHolder) {
+    private static final String BILL_LIST = "BILL_LIST";
 
-        Bundle bundle = new Bundle();
-        bundle.putInt(BILL_SELECTED_POSITION, stateHolder.getBillSelectedPosition());
-        return bundle;
+    @Override
+    public Bundle saveState(BillListStateHolder stateHolder, Bundle outState) {
+
+        outState.putInt(BILL_SELECTED_POSITION, stateHolder.getBillSelectedPosition());
+        outState.putSerializable(BILL_LIST, (Serializable) stateHolder.getBills());
+
+        return outState;
     }
 
     @Override
@@ -22,7 +29,7 @@ public class BillListStateManager extends StateManager<BillListStateHolder> {
 
         BillListStateHolder stateHolder = new BillListStateHolder();
         stateHolder.setBillSelectedPosition(savedState.getInt(BILL_SELECTED_POSITION));
-
+        stateHolder.setBills((List<Bill>) savedState.getSerializable(BILL_LIST));
         return stateHolder;
     }
 }
