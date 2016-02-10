@@ -1,52 +1,66 @@
 package com.cedulio.sparrow.data.repository.datasource.bill;
 
 
-import com.cedulio.sparrow.data.entity.BillEntity;
-import com.cedulio.sparrow.data.transfer.BillTO;
-import com.cedulio.sparrow.data.net.SparrowService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.SerializedName;
+
+import com.cedulio.sparrow.data.R;
+import com.cedulio.sparrow.data.entity.BillEntity;
+import com.cedulio.sparrow.data.net.rest.SparrowService;
+import com.cedulio.sparrow.data.transfer.BillTO;
+import com.cedulio.sparrow.domain.exception.ConnectionProblemException;
+
+import android.content.Context;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
-import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.http.GET;
 
 public class CloudBillDataStore implements BillDataStore {
 
+    private Gson gson;
 
-    private final SparrowService sparrowService;
+    private SparrowService sparrowService;
 
-    public CloudBillDataStore() {
+    private Context context;
 
-        Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd")
-                .create();
+    public CloudBillDataStore(Context context) {
+        setContext(context.getApplicationContext());
+        initGson();
+        initSparrowService();
+    }
 
+    private void initSparrowService() {
         this.sparrowService = new Retrofit.Builder().baseUrl(SparrowService.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(SparrowService.class);
     }
 
+    private void initGson() {
+        gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd")
+                .create();
+    }
+
     @Override
-    public List<BillEntity> getBills() throws IOException {
+    public List<BillEntity> getBills() throws ConnectionProblemException {
         return getBillList();
     }
 
-    private List<BillEntity> getBillList() throws IOException {
+    private List<BillEntity> getBillList() throws ConnectionProblemException {
 
-        Call<List<BillTO>> callEntity = sparrowService.listBill();
-        Response<List<BillTO>> response = callEntity.execute();
-        List<BillTO> billTOList = response.body();
+        try {
+            List<BillTO> billTOList = getSparrowService().listBill().execute().body();
 
-        return extractBillEntityList(billTOList);
+            return extractBillEntityList(billTOList);
+        } catch (IOException e) {
+            throw new ConnectionProblemException(
+                    getContext().getString(R.string.connection_problem_message));
+        }
     }
 
     private List<BillEntity> extractBillEntityList(List<BillTO> billTOList) {
@@ -63,5 +77,17 @@ public class CloudBillDataStore implements BillDataStore {
     @Override
     public BillEntity getBill(String id) {
         throw new UnsupportedOperationException("Not available");
+    }
+
+    private SparrowService getSparrowService() {
+        return sparrowService;
+    }
+
+    private Context getContext() {
+        return context;
+    }
+
+    private void setContext(Context context) {
+        this.context = context;
     }
 }

@@ -1,19 +1,27 @@
 package com.cedulio.sparrow.data.repository.datasource.bill;
 
 
+import android.content.Context;
+
 public class BillDataStoreFactory {
 
-    private static BillDataStoreFactory INSTANCE = new BillDataStoreFactory();
+    private static BillDataStoreFactory INSTANCE;
 
-    public static BillDataStoreFactory getInstance() {
+    private Context context;
+
+    private BillDataStoreFactory(Context context) {
+        this.context = context;
+    }
+
+    public static BillDataStoreFactory getInstance(Context context) {
+
+        if (INSTANCE == null) {
+            INSTANCE = new BillDataStoreFactory(context);
+        }
         return INSTANCE;
     }
 
-    private BillDataStoreFactory() {
-
-    }
-
-    public BillDataStore createCloudDataStore(){
-        return new CloudBillDataStore();
+    public BillDataStore createCloudDataStore() {
+        return new CloudBillDataStore(context);
     }
 }

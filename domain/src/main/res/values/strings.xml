@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">Interactor</string>
-    <string formatted="false" name="bill_transaction_description">%s %d/%d</string>
-    <string name="no_internet_error_message">Parece que você está sem internet! Por favor, verifique
-        a sua conexão e tente novamente.
-    </string>
     <string formatted="false" name="close_date_format">Vencimento %s</string>
     <string formatted="false" name="close_date_format_long">FECHAMENTO EM %d DE %s</string>
     <string formatted="false" name="line_items_period_header">%s ATÉ %s</string>

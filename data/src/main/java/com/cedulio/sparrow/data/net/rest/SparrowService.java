@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.data.net;
+package com.cedulio.sparrow.data.net.rest;
 
 
 import com.cedulio.sparrow.data.transfer.BillTO;

@@ -1,6 +1,7 @@
 package com.cedulio.sparrow.domain.interactor.bill;
 
 
+import com.cedulio.sparrow.domain.exception.ConnectionProblemException;
 import com.cedulio.sparrow.domain.executor.Executor;
 import com.cedulio.sparrow.domain.executor.MainThread;
 import com.cedulio.sparrow.domain.interactor.base.AbstractUseCase;
@@ -29,13 +30,30 @@ public class GetBills extends AbstractUseCase {
         try {
             final List<Bill> list = getBillRepository().getBills();
             deliverBillsOnMainThread(list);
+        }catch (ConnectionProblemException e){
+            notifyOnMainThread(e);
         } catch (Exception e) {
             notifyErrorOnMainThread(e);
         }
     }
 
-    private void notifyErrorOnMainThread(Exception e) {
-        getCallBack().onErrorLoadingBills(e);
+    private void notifyOnMainThread(final ConnectionProblemException e) {
+        getMainThread().post(new Runnable() {
+            @Override
+            public void run() {
+                getCallBack().connectionProblemLoadingBills(e);
+            }
+        });
+    }
+
+    private void notifyErrorOnMainThread(final Exception e) {
+        getMainThread().post(new Runnable() {
+            @Override
+            public void run() {
+                getCallBack().problemLoadingBills(e);
+            }
+        });
+
     }
 
     private void deliverBillsOnMainThread(final List<Bill> list) {
@@ -67,7 +85,9 @@ public class GetBills extends AbstractUseCase {
 
         void onLoadBills(List<Bill> bills);
 
-        void onErrorLoadingBills(Exception e);
+        void problemLoadingBills(Exception e);
+
+        void connectionProblemLoadingBills(ConnectionProblemException e);
     }
 }
 

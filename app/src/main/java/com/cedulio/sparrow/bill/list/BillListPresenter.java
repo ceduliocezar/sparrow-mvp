@@ -2,6 +2,7 @@ package com.cedulio.sparrow.bill.list;
 
 import com.cedulio.mvp.Presenter;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
+import com.cedulio.sparrow.domain.exception.ConnectionProblemException;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
 import com.cedulio.sparrow.domain.formatter.MonthFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;
@@ -31,7 +32,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     private void initUseCaseGetBills() {
-        this.getBills = new GetBills(new BillDataRepository(), this,
+        this.getBills = new GetBills(new BillDataRepository(getView().getContext()), this,
                 MainThreadAndroid.getInstance(), ThreadExecutor.getInstance());
     }
 
@@ -130,7 +131,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     private void renderCurrentState() {
         renderBills();
-        if(hasSelectedBill()){
+        if (hasSelectedBill()) {
             renderBillSelected();
         }
     }
@@ -148,12 +149,24 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     }
 
     @Override
-    public void onErrorLoadingBills(Exception e) {
+    public void problemLoadingBills(Exception e) {
         hideLoading();
-        showError(e);
+        showErrorGenericError(e);
     }
 
-    private void showError(Exception e) {
+    @Override
+    public void connectionProblemLoadingBills(ConnectionProblemException e) {
+        e.printStackTrace();
+        hideLoading();
+        showConnectionProblemError(e);
+    }
+
+    private void showConnectionProblemError(ConnectionProblemException e) {
+        getView().showError(e.getMessage());
+    }
+
+    private void showErrorGenericError(Exception e) {
+        e.printStackTrace();
         getView().showError(e.getMessage());
     }
 
