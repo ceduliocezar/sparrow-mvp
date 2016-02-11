@@ -1,8 +1,6 @@
 package com.cedulio.sparrow.bill;
 
 
-import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.beardedhen.androidbootstrap.api.defaults.DefaultBootstrapBrand;
 import com.cedulio.sparrow.R;
 import com.cedulio.sparrow.bill.adapter.LineItemAdapter;
 import com.cedulio.sparrow.bill.list.utilities.BillColorSelector;
@@ -17,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -36,7 +35,7 @@ public class BillFragment extends Fragment implements BillView, LineItemAdapter.
     ListView lineItensListView;
 
     @Bind(R.id.frag_bill__bt__gerar)
-    BootstrapButton gerarBoletoButton;
+    Button gerarBoletoButton;
 
     @Bind(R.id.frag_bill__tv__total_balance)
     TextView totalBalanceTextView;
@@ -179,10 +178,12 @@ public class BillFragment extends Fragment implements BillView, LineItemAdapter.
     }
 
     private void setButtonGerarBoletoColor(Bill.State state) {
+        gerarBoletoButton.setTextColor(BillColorSelector.getColor(state, getContext()));
+
         if (isClosed(state)) {
-            gerarBoletoButton.setBootstrapBrand(DefaultBootstrapBrand.DANGER);
+            gerarBoletoButton.setBackgroundResource(R.drawable.closed_button);
         } else {
-            gerarBoletoButton.setBootstrapBrand(DefaultBootstrapBrand.INFO);
+            gerarBoletoButton.setBackgroundResource(R.drawable.open_button);
         }
 
     }

@@ -29,7 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':domain')
     compile project(':data')
-    compile 'com.beardedhen:androidbootstrap:2.0.1'
     compile 'com.jpardogo.materialtabstrip:library:1.1.0'
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
 }
