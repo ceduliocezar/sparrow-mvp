@@ -1,6 +1,6 @@
-package com.cedulio.sparrow.bill.list;
+package com.cedulio.sparrow.bill.listing;
 
-import com.cedulio.mvp.StateHolder;
+import com.cedulio.sparrow.android.mvp.StateHolder;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import java.util.ArrayList;

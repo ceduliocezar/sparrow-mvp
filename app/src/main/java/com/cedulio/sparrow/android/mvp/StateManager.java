@@ -1,6 +1,6 @@
-package com.cedulio.mvp;
+package com.cedulio.sparrow.android.mvp;
 
-import com.cedulio.sparrow.bill.list.BillListStateHolder;
+import com.cedulio.sparrow.bill.listing.BillListStateHolder;
 
 import android.os.Bundle;
 

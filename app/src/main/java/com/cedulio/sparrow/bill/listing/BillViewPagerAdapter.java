@@ -1,10 +1,9 @@
-package com.cedulio.sparrow.bill.list.adapter;
+package com.cedulio.sparrow.bill.listing;
 
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.cedulio.sparrow.R;
 import com.cedulio.sparrow.bill.BillFragment;
-import com.cedulio.sparrow.bill.list.utilities.BillColorSelector;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import android.content.Context;

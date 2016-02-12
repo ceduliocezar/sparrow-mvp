@@ -1,4 +1,4 @@
-package com.cedulio.mvp;
+package com.cedulio.sparrow.android.mvp;
 
 public interface LoadDataView extends MVPView {
 

@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.bill;
 
-import com.cedulio.mvp.Presenter;
+import com.cedulio.sparrow.android.mvp.Presenter;
 import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
 import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
 import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;

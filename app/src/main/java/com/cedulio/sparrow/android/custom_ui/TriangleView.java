@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.cedulio.custom_ui;
+package com.cedulio.sparrow.android.custom_ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;

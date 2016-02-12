@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.bill.adapter;
+package com.cedulio.sparrow.bill;
 
 import com.cedulio.sparrow.R;
 import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;

@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.bill;
 
-import com.cedulio.mvp.MVPView;
+import com.cedulio.sparrow.android.mvp.MVPView;
 import com.cedulio.sparrow.domain.model.Bill;
 
 

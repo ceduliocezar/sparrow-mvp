@@ -76,7 +76,7 @@
         </FrameLayout>
 
 
-        <com.cedulio.custom_ui.TriangleView
+        <com.cedulio.sparrow.android.custom_ui.TriangleView
             android:id="@+id/act_bill_list__tv"
             android:layout_width="15dp"
             android:layout_height="10dp"

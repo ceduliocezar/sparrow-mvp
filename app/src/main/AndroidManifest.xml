@@ -10,7 +10,7 @@
             android:debuggable="true"
             android:theme="@style/AppTheme.NoActionBar">
         <activity
-                android:name=".bill.list.BillListActivity"
+                android:name=".bill.listing.BillListActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

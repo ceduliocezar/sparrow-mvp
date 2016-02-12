@@ -1,11 +1,9 @@
-package com.cedulio.sparrow.bill.list;
+package com.cedulio.sparrow.bill.listing;
 
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.cedulio.custom_ui.TriangleView;
+import com.cedulio.sparrow.android.custom_ui.TriangleView;
 import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.bill.list.adapter.BillViewPagerAdapter;
-import com.cedulio.sparrow.bill.list.utilities.BillColorSelector;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import android.content.Context;

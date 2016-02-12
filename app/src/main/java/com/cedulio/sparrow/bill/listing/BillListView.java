@@ -1,7 +1,7 @@
-package com.cedulio.sparrow.bill.list;
+package com.cedulio.sparrow.bill.listing;
 
 import com.cedulio.sparrow.domain.model.Bill;
-import com.cedulio.mvp.LoadDataView;
+import com.cedulio.sparrow.android.mvp.LoadDataView;
 
 import java.util.List;
 

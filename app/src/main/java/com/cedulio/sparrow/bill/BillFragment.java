@@ -2,8 +2,7 @@ package com.cedulio.sparrow.bill;
 
 
 import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.bill.adapter.LineItemAdapter;
-import com.cedulio.sparrow.bill.list.utilities.BillColorSelector;
+import com.cedulio.sparrow.bill.listing.BillColorSelector;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.model.Summary;

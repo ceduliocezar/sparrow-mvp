@@ -1,4 +1,4 @@
-package com.cedulio.threading;
+package com.cedulio.sparrow.android.threading;
 
 import android.os.Handler;
 import android.os.Looper;
