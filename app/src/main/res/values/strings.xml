@@ -7,5 +7,8 @@
     <string name="month_expenses">Gastos do mês</string>
     <string name="paid">PAGAMENTO RECEBIDO</string>
     <string name="gerar_boleto">GERAR BOLETO</string>
+    <string name="try_again">Tentar novamente</string>
+    <string name="not_able_to_complete">Não conseguimos completar a operação.</string>
+    <string name="ops">Ops</string>
 
 </resources>

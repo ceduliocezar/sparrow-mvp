@@ -1,15 +1,15 @@
 package com.cedulio.sparrow.bill.listing;
 
+import android.os.Bundle;
+
 import com.cedulio.sparrow.android.mvp.Presenter;
+import com.cedulio.sparrow.android.threading.MainThreadAndroid;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.exception.ConnectionProblemException;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
 import com.cedulio.sparrow.domain.formatter.MonthFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;
 import com.cedulio.sparrow.domain.model.Bill;
-import com.cedulio.sparrow.android.threading.MainThreadAndroid;
-
-import android.os.Bundle;
 
 import java.util.List;
 
@@ -152,6 +152,11 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
     public void problemLoadingBills(Exception e) {
         hideLoading();
         showErrorGenericError(e);
+        showRetry();
+    }
+
+    private void showRetry() {
+        getView().showRetry();
     }
 
     @Override
@@ -159,6 +164,7 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
         e.printStackTrace();
         hideLoading();
         showConnectionProblemError(e);
+        showRetry();
     }
 
     private void showConnectionProblemError(ConnectionProblemException e) {
@@ -197,5 +203,15 @@ public class BillListPresenter extends Presenter implements GetBills.CallBack {
 
     private void setStateManager(BillListStateManager stateManager) {
         this.stateManager = stateManager;
+    }
+
+    public void onCliCkRetry() {
+        hideRetry();
+        showLoading();
+        loadDataFromDomain();
+    }
+
+    private void hideRetry() {
+        getView().hideRetry();
     }
 }

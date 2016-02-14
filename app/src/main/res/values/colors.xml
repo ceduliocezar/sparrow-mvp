@@ -10,6 +10,7 @@
     <color name="bill_future">#F5A623</color>
 
     <color name="back_button_pressd">#B6B6B6</color>
+    <color name="layout_background_color">#f7f7f7</color>
 
     <integer-array name="progress_colors">
         <item>@color/bill_overdue</item>

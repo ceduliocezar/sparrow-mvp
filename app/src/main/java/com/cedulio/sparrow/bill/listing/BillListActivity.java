@@ -1,28 +1,28 @@
 package com.cedulio.sparrow.bill.listing;
 
 
-import com.astuetz.PagerSlidingTabStrip;
-import com.cedulio.sparrow.android.custom_ui.TriangleView;
-import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.bill.BillColorSelector;
-import com.cedulio.sparrow.domain.model.Bill;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
+import com.cedulio.sparrow.R;
+import com.cedulio.sparrow.android.custom_ui.TriangleView;
+import com.cedulio.sparrow.bill.BillColorSelector;
+import com.cedulio.sparrow.domain.model.Bill;
+
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class BillListActivity extends AppCompatActivity
         implements BillListView, BillViewPagerAdapter.BillViewPagerListener,
@@ -48,6 +48,9 @@ public class BillListActivity extends AppCompatActivity
 
     @Bind(R.id.act_bill_list__ln__loader)
     LinearLayout loadingLayout;
+
+    @Bind(R.id.act_bill_list__ln__retry)
+    LinearLayout retryLayout;
 
     private BillViewPagerAdapter mPagerAdapter;
 
@@ -129,6 +132,11 @@ public class BillListActivity extends AppCompatActivity
     public void renderBillSelected(Bill bill, int billSelectedPosition) {
         updateViewPagerSelection(billSelectedPosition);
         updateViewColor(bill);
+        showMarker();
+    }
+
+    private void showMarker() {
+        triangleView.setVisibility(View.VISIBLE);
     }
 
     private void updateViewPagerSelection(int billSelectedPosition) {
@@ -139,26 +147,45 @@ public class BillListActivity extends AppCompatActivity
     @Override
     public void showLoading() {
         loadingLayout.setVisibility(View.VISIBLE);
+        loadingLayout.setAlpha(0.0f);
+
+        loadingLayout.animate().alpha(1.0f);
     }
 
     @Override
     public void hideLoading() {
         loadingLayout.setVisibility(View.GONE);
+
+        loadingLayout.setAlpha(1.0f);
+
+        loadingLayout.animate().alpha(0.0f);
     }
 
     @Override
     public void showRetry() {
-        Log.d("debug", "showRetry");
+        retryLayout.setVisibility(View.VISIBLE);
+        retryLayout.setAlpha(0.0f);
+
+        retryLayout.animate().alpha(1.0f);
     }
 
     @Override
     public void hideRetry() {
-        Log.d("debug", "hideRetry");
+        retryLayout.setVisibility(View.GONE);
+
+        retryLayout.setAlpha(1.0f);
+
+        retryLayout.animate().alpha(0.0f);
     }
 
     @Override
     public void showError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        hideMarker();
+    }
+
+    private void hideMarker() {
+        triangleView.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -204,5 +231,10 @@ public class BillListActivity extends AppCompatActivity
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         getBillListPresenter().onSaveInstanceState(outState);
+    }
+
+    @OnClick(R.id.act_bill_list__bt__retry)
+    public void onClickRetry(){
+        getBillListPresenter().onCliCkRetry();
     }
 }
