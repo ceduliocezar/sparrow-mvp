@@ -10,9 +10,16 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
+import com.cedulio.sparrow.R;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
+import static android.support.test.espresso.action.ViewActions.swipeRight;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -24,7 +31,7 @@ public class BillListActivityTest {
             BillListActivity.class);
 
     @Test
-    public void testeSaveState() {
+    public void testSaveState() {
         rotateScreen();
     }
 
@@ -37,4 +44,13 @@ public class BillListActivityTest {
                 ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
+    @Test
+    public void testSlideTabs() {
+        onView(withId(R.id.act_bill_list__vp)).perform(swipeRight());
+        onView(withId(R.id.act_bill_list__vp)).perform(swipeRight());
+        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+    }
 }
