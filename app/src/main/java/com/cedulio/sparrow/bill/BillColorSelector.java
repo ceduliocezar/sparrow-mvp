@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.bill.listing;
+package com.cedulio.sparrow.bill;
 
 
 import android.content.Context;

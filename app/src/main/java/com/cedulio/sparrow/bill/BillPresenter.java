@@ -69,7 +69,7 @@ public class BillPresenter extends Presenter {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        //TODO TECBMCCS
+
     }
 
     private BillView getBillView() {

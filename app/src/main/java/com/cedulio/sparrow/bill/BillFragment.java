@@ -2,7 +2,10 @@ package com.cedulio.sparrow.bill;
 
 
 import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.bill.listing.BillColorSelector;
+import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
+import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
+import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
+import com.cedulio.sparrow.domain.formatter.SummaryPeriodFormatter;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.model.Summary;
@@ -72,6 +75,14 @@ public class BillFragment extends Fragment implements BillView, LineItemAdapter.
     @Bind(R.id.frag_bill__tv__period_header)
     TextView periodLineItemsTextView;
 
+    private CurrencyFormatter currencyFormatter;
+
+    private LineItemDescriptionFormatter lineItemDescriptionFormatter;
+
+    private CloseDateFormatter closeDateFormatter;
+
+    private SummaryPeriodFormatter summaryPeriodFormatter;
+
 
     private BillPresenter billPresenter;
 
@@ -103,7 +114,9 @@ public class BillFragment extends Fragment implements BillView, LineItemAdapter.
             Bundle savedInstanceState) {
 
         View view = inflateView(inflater, container);
+
         ButterKnife.bind(this, view);
+
         getBillPresenter().onCreateView(savedInstanceState);
         return view;
     }
@@ -328,4 +341,7 @@ public class BillFragment extends Fragment implements BillView, LineItemAdapter.
     public String getLineItemTitleFormatted(LineItem lineItem) {
         return getBillPresenter().getLineItemTitleFormatted(lineItem);
     }
+
+
+
 }

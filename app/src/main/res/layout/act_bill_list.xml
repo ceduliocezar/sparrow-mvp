@@ -54,7 +54,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:text=""
+                            android:clickable="true"
+                            android:focusable="true"
                             android:textColor="#FFF"
+                            android:background="@drawable/back_button_selector"
                             android:textSize="35sp" />
                     </LinearLayout>
 
@@ -120,6 +123,8 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="#FFF"
+                    android:clickable="true"
+                    android:background="@drawable/back_button_selector"
                     android:paddingRight="20dp"
                     android:textSize="35sp" />
 

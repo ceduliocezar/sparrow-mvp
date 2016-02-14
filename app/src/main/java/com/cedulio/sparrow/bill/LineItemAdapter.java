@@ -24,7 +24,6 @@ public class LineItemAdapter extends BaseAdapter {
 
     private Callback callback;
 
-    private CloseDateFormatter closeDateFormatter;
 
     public LineItemAdapter(Context context, List<LineItem> items, Callback callback) {
         setInflater(LayoutInflater.from(context));
@@ -52,7 +51,7 @@ public class LineItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.lv_item_item, null);
+            convertView = getInflater().inflate(R.layout.lv_item_item, null);
         }
 
         setPostDateText(position, convertView);
@@ -139,15 +138,6 @@ public class LineItemAdapter extends BaseAdapter {
 
     private void setItems(List<LineItem> items) {
         this.items = items;
-    }
-
-    private CloseDateFormatter getCloseDateFormatter() {
-        return closeDateFormatter;
-    }
-
-    private void setCloseDateFormatter(
-            CloseDateFormatter closeDateFormatter) {
-        this.closeDateFormatter = closeDateFormatter;
     }
 
     public interface Callback {

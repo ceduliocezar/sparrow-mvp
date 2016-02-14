@@ -1,6 +1,8 @@
 package com.cedulio.sparrow.data.repository;
 
 
+import android.content.Context;
+
 import com.cedulio.sparrow.domain.model.Bill;
 
 import org.junit.Assert;
@@ -18,10 +20,13 @@ public class BillDataRepositoryTest {
     @Mock
     private Bill bill;
 
+    @Mock
+    private Context context;
+
     @Test
     public void testCloud() throws Exception {
 
-        BillDataRepository repository = new BillDataRepository();
+        BillDataRepository repository = new BillDataRepository(context);
 
         List<Bill> list = repository.getBills();
 
@@ -31,7 +36,7 @@ public class BillDataRepositoryTest {
     @Test
     public void testCloudMapper() throws Exception {
 
-        BillDataRepository repository = new BillDataRepository();
+        BillDataRepository repository = new BillDataRepository(context);
 
         List<Bill> list = repository.getBills();
 
