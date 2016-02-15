@@ -91,7 +91,7 @@ public class TriangleView extends View {
             mColor = DEFAULT_COLOR;
         }
 
-        mPaint = new Paint();
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(mColor);
     }
@@ -109,6 +109,7 @@ public class TriangleView extends View {
             }
             mTrianglePath = null;
             invalidate();
+            requestLayout();
         }
     }
 
@@ -121,6 +122,8 @@ public class TriangleView extends View {
         if (direction != mDirection) {
             mDirection = direction;
             mTrianglePath = null;
+            invalidate();
+            requestLayout();
         }
     }
 
