@@ -114,6 +114,7 @@ public class BillListActivity extends AppCompatActivity
         mPagerAdapter = new BillViewPagerAdapter(getSupportFragmentManager(),
                 BillListActivity.this, BillListActivity.this);
         viewPagerBills.setAdapter(mPagerAdapter);
+        viewPagerBills.setOffscreenPageLimit(5);
 
         tabs.setViewPager(viewPagerBills);
     }
