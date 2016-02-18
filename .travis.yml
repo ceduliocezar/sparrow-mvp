@@ -14,12 +14,4 @@ android:
   - 'android-sdk-preview-license-52d11cd2'
   - 'android-sdk-license-.+'
   - 'google-gdk-license-.+'
-after_script:
-  - echo "Dumping lint report out to console so it can be reviewed, save the following to an HTML file and open in a web browser for a nice report..."
-  - echo "-----------------------------------------------------------------------------------------"
-  - cat home/travis/build/ceduliocezar/sparrow-mvp/app/build/outputs/lint-results.html
-  - echo "-----------------------------------------------------------------------------------------"
-  - echo "-----------------------------------------------------------------------------------------"
-  - echo "Dumping lint report out to console so it can be reviewed, save the following to an XML file and autoformat (or use online XML formatter)..."
-  - echo "-----------------------------------------------------------------------------------------"
-  - cat home/travis/build/ceduliocezar/sparrow-mvp/app/build/outputs/lint-results.xml
+after_failure: "cat /home/travis/build/ceduliocezar/sparrow-mvp/app/build/outputs/lint-results.html"
