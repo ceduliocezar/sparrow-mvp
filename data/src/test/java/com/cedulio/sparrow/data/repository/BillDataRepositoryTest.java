@@ -29,7 +29,7 @@ public class BillDataRepositoryTest {
     public void testCloud() throws Exception {
 
 
-        mockApplicationContext();
+//        mockApplicationContext();
 
         BillDataRepository repository = new BillDataRepository(context);
 
