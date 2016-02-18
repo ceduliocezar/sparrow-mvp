@@ -12,4 +12,11 @@ android:
   - 'android-sdk-preview-license-52d11cd2'
   - 'android-sdk-license-.+'
   - 'google-gdk-license-.+'
-after_failure: "cat /home/travis/build/ceduliocezar/sparrow-mvp/app/build/outputs/lint-results.html"
+after_failure: 
+  - echo "Dumping lint report out to console so it can be reviewed"
+  - echo "---app"
+  - "cat /home/travis/build/ceduliocezar/sparrow-mvp/app/build/outputs/lint-results.html"
+  - echo "---data"
+  - "cat /home/travis/build/ceduliocezar/sparrow-mvp/data/build/outputs/lint-results.html"
+  - echo "---domain"
+  - "cat /home/travis/build/ceduliocezar/sparrow-mvp/domain/build/outputs/lint-results.html"
