@@ -39,6 +39,10 @@ ext {
     supportTest = [espressoCore: 'com.android.support.test.espresso:espresso-core:2.2.1',
                    rules       : 'com.android.support.test:rules:0.4.1',
                    runner      : 'com.android.support.test:runner:0.4.1']
+
+    travisBuild = System.getenv("TRAVIS") == "true"
+    // allows for -Dpre-dex=false to be set
+    preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 }
 
 allprojects {
