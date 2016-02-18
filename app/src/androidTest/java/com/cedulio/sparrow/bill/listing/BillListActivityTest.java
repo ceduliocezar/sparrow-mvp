@@ -26,31 +26,31 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 @LargeTest
 public class BillListActivityTest {
 
-    @Rule
-    public ActivityTestRule<BillListActivity> mActivityRule = new ActivityTestRule<>(
-            BillListActivity.class);
-
-    @Test
-    public void testSaveState() {
-        rotateScreen();
-    }
-
-    private void rotateScreen() {
-        Context context = InstrumentationRegistry.getTargetContext();
-        int orientation = context.getResources().getConfiguration().orientation;
-
-        Activity activity = mActivityRule.getActivity();
-        activity.setRequestedOrientation((orientation == Configuration.ORIENTATION_PORTRAIT) ?
-                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    @Test
-    public void testSlideTabs() {
-        onView(withId(R.id.act_bill_list__vp)).perform(swipeRight());
-        onView(withId(R.id.act_bill_list__vp)).perform(swipeRight());
-        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
-        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
-        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
-        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
-    }
+//    @Rule
+//    public ActivityTestRule<BillListActivity> mActivityRule = new ActivityTestRule<>(
+//            BillListActivity.class);
+//
+//    @Test
+//    public void testSaveState() {
+//        rotateScreen();
+//    }
+//
+//    private void rotateScreen() {
+//        Context context = InstrumentationRegistry.getTargetContext();
+//        int orientation = context.getResources().getConfiguration().orientation;
+//
+//        Activity activity = mActivityRule.getActivity();
+//        activity.setRequestedOrientation((orientation == Configuration.ORIENTATION_PORTRAIT) ?
+//                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//    }
+//
+//    @Test
+//    public void testSlideTabs() {
+//        onView(withId(R.id.act_bill_list__vp)).perform(swipeRight());
+//        onView(withId(R.id.act_bill_list__vp)).perform(swipeRight());
+//        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+//        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+//        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+//        onView(withId(R.id.act_bill_list__vp)).perform(swipeLeft());
+//    }
 }
