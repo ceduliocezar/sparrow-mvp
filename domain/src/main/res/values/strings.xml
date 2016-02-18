@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Interactor</string>
-    <string formatted="false" name="close_date_format">Vencimento %s</string>
-    <string formatted="false" name="close_date_format_long">FECHAMENTO EM %d DE %s</string>
-    <string formatted="false" name="line_items_period_header">%s ATÉ %s</string>
+    <string name="close_date_format">Vencimento %1$s</string>
+    <string name="close_date_format_long">FECHAMENTO EM %1$d DE %2$s</string>
+    <string name="line_items_period_header">%1$s ATÉ %2$s</string>
     <string name="line_items_value_header">VALORES EM R$</string>
 </resources>
