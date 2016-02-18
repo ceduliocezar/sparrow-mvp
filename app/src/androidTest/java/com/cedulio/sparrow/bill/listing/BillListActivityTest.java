@@ -22,8 +22,8 @@ import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 
-@RunWith(AndroidJUnit4.class)
-@LargeTest
+//@RunWith(AndroidJUnit4.class)
+//@LargeTest
 public class BillListActivityTest {
 
 //    @Rule
