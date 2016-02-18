@@ -12,6 +12,22 @@ buildscript {
     }
 }
 
+ext {
+    configCompileSdkVersion = 23
+    configTargetSdkVersion = 23
+    configBuildToolsVersion = '23.0.2'
+
+    support = [annotations: "com.android.support:support-annotations:23.1.1",
+               appCompat  : "com.android.support:appcompat-v7:23.0.1"]
+
+    assertJCore = 'org.assertj:assertj-core:1.7.1'
+    junit = 'junit:junit:4.12'
+
+    supportTest = [espressoCore: 'com.android.support.test.espresso:espresso-core:2.2.1',
+                   rules       : 'com.android.support.test:rules:0.4.1',
+                   runner      : 'com.android.support.test:runner:0.4.1']
+}
+
 allprojects {
     repositories {
         jcenter()
