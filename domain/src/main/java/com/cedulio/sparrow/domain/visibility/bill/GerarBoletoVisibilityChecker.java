@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.domain.interactor.bill.visibility;
+package com.cedulio.sparrow.domain.visibility.bill;
 
 import com.cedulio.sparrow.domain.model.Bill;
 

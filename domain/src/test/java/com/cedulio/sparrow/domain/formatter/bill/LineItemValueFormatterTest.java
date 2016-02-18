@@ -1,6 +1,4 @@
-package com.cedulio.sparrow.domain.bill.formatter;
-
-import com.cedulio.sparrow.domain.formatter.LineItemValueFormatter;
+package com.cedulio.sparrow.domain.formatter.bill;
 
 import org.junit.Assert;
 import org.junit.Test;

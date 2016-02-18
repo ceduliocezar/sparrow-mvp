@@ -7,7 +7,7 @@ import com.cedulio.sparrow.android.threading.MainThreadAndroid;
 import com.cedulio.sparrow.data.repository.BillDataRepository;
 import com.cedulio.sparrow.domain.exception.ConnectionProblemException;
 import com.cedulio.sparrow.domain.executor.impl.ThreadExecutor;
-import com.cedulio.sparrow.domain.formatter.MonthFormatter;
+import com.cedulio.sparrow.domain.formatter.bill.MonthFormatter;
 import com.cedulio.sparrow.domain.interactor.bill.GetBills;
 import com.cedulio.sparrow.domain.model.Bill;
 

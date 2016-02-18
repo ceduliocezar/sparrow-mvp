@@ -1,7 +1,5 @@
-package com.cedulio.sparrow.domain.bill.formatter;
+package com.cedulio.sparrow.domain.formatter.bill;
 
-import com.cedulio.sparrow.domain.formatter.MonthFormatter;
-import com.cedulio.sparrow.domain.formatter.PostDateFormatter;
 import com.cedulio.sparrow.domain.utilities.DefaultLocale;
 
 import org.junit.Assert;

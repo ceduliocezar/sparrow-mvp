@@ -1,11 +1,11 @@
 package com.cedulio.sparrow.bill;
 
 import com.cedulio.sparrow.android.mvp.Presenter;
-import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
+import com.cedulio.sparrow.domain.formatter.bill.CloseDateFormatter;
 import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
-import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
-import com.cedulio.sparrow.domain.formatter.SummaryPeriodFormatter;
-import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityChecker;
+import com.cedulio.sparrow.domain.formatter.bill.LineItemDescriptionFormatter;
+import com.cedulio.sparrow.domain.formatter.bill.SummaryPeriodFormatter;
+import com.cedulio.sparrow.domain.visibility.bill.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.model.Summary;

@@ -1,7 +1,6 @@
-package com.cedulio.sparrow.domain.bill.formatter;
+package com.cedulio.sparrow.domain.formatter.bill;
 
 
-import com.cedulio.sparrow.domain.formatter.MonthExpensesFormatter;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import org.junit.Assert;

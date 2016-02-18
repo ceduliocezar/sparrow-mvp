@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.domain.formatter;
+package com.cedulio.sparrow.domain.formatter.bill;
 
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;

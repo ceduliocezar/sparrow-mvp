@@ -1,6 +1,6 @@
-package com.cedulio.sparrow.domain.bill.visibility;
+package com.cedulio.sparrow.domain.bill.visibility.bill;
 
-import com.cedulio.sparrow.domain.interactor.bill.visibility.GerarBoletoVisibilityChecker;
+import com.cedulio.sparrow.domain.visibility.bill.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.Summary;
 

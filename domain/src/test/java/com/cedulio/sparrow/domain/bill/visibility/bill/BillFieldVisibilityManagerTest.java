@@ -1,7 +1,7 @@
-package com.cedulio.sparrow.domain.bill.visibility;
+package com.cedulio.sparrow.domain.bill.visibility.bill;
 
 
-import com.cedulio.sparrow.domain.interactor.bill.visibility.BillFieldVisibilityChecker;
+import com.cedulio.sparrow.domain.visibility.bill.BillFieldVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 
 import org.junit.Assert;

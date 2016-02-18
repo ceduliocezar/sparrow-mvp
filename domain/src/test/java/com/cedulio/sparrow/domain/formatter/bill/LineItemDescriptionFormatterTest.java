@@ -1,18 +1,14 @@
-package com.cedulio.sparrow.domain.bill.formatter;
+package com.cedulio.sparrow.domain.formatter.bill;
 
 
-import com.cedulio.sparrow.domain.formatter.LineItemDescriptionFormatter;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
-import com.cedulio.sparrow.domain.R;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import android.content.Context;
 
 import static org.mockito.Mockito.when;
 

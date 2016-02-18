@@ -1,9 +1,8 @@
 package com.cedulio.sparrow.bill;
 
 import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.domain.formatter.CloseDateFormatter;
-import com.cedulio.sparrow.domain.formatter.LineItemValueFormatter;
-import com.cedulio.sparrow.domain.formatter.PostDateFormatter;
+import com.cedulio.sparrow.domain.formatter.bill.LineItemValueFormatter;
+import com.cedulio.sparrow.domain.formatter.bill.PostDateFormatter;
 import com.cedulio.sparrow.domain.model.LineItem;
 
 import android.content.Context;
