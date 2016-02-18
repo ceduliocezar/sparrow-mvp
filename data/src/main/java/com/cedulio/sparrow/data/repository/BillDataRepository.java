@@ -1,7 +1,6 @@
 package com.cedulio.sparrow.data.repository;
 
 
-import com.cedulio.sparrow.data.cache.CacheManager;
 import com.cedulio.sparrow.data.entity.mapper.BillEntityMapper;
 import com.cedulio.sparrow.data.repository.datasource.bill.BillDataStore;
 import com.cedulio.sparrow.data.repository.datasource.bill.BillDataStoreFactory;
@@ -17,13 +16,10 @@ public class BillDataRepository implements BillRepository {
 
     private final BillEntityMapper mapper;
 
-    private CacheManager cacheManager;
-
     private Context context;
 
     public BillDataRepository(Context context) {
         this.mapper = new BillEntityMapper();
-        this.cacheManager = new CacheManager();
         this.context = context.getApplicationContext();
     }
 
