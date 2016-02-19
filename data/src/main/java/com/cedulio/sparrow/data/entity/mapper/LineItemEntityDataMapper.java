@@ -5,6 +5,7 @@ import com.cedulio.sparrow.domain.model.LineItem;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class LineItemEntityDataMapper {
@@ -26,6 +27,11 @@ public class LineItemEntityDataMapper {
     }
 
     public List<LineItem> transform(Collection<LineItemEntity> lineItemEntityCollection) {
+
+        if (lineItemEntityCollection == null) {
+            return Collections.emptyList();
+        }
+
         List<LineItem> lineItemList = new ArrayList<>();
         LineItem lineItem;
 

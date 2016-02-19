@@ -8,11 +8,13 @@ import com.cedulio.sparrow.domain.model.Summary;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-public class BillEntityMapper {
+public class BillEntityDataMapper {
 
     private SummaryEntityDataMapper summaryEntityDataMapper = new SummaryEntityDataMapper();
+
     private LineItemEntityDataMapper lineItemEntityDataMapper = new LineItemEntityDataMapper();
 
     public Bill transform(BillEntity billEntity) {
@@ -42,9 +44,13 @@ public class BillEntityMapper {
 
     public List<Bill> transform(Collection<BillEntity> billEntityCollection) {
 
-        List<Bill> billList = new ArrayList<>();
-        Bill bill;
+        if (billEntityCollection == null) {
+            return Collections.emptyList();
+        }
 
+        List<Bill> billList = Collections.emptyList();
+
+        Bill bill;
         for (BillEntity billEntity : billEntityCollection) {
             bill = transform(billEntity);
             if (bill != null) {
