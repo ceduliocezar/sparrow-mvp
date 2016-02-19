@@ -4,7 +4,7 @@ package com.cedulio.sparrow.domain.interactor.bill;
 import com.cedulio.sparrow.domain.exception.ConnectionProblemException;
 import com.cedulio.sparrow.domain.executor.Executor;
 import com.cedulio.sparrow.domain.executor.MainThread;
-import com.cedulio.sparrow.domain.interactor.base.AbstractUseCase;
+import com.cedulio.sparrow.domain.interactor.AbstractUseCase;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.repository.BillRepository;
 
@@ -79,6 +79,11 @@ public class GetBills extends AbstractUseCase {
 
     private void setBillRepository(BillRepository billRepository) {
         this.billRepository = billRepository;
+    }
+
+    @Override
+    public void onFinished() {
+        super.onFinished();
     }
 
     public interface CallBack {

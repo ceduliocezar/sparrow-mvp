@@ -1,6 +1,6 @@
 package com.cedulio.sparrow.domain.executor;
 
-import com.cedulio.sparrow.domain.interactor.base.AbstractUseCase;
+import com.cedulio.sparrow.domain.interactor.AbstractUseCase;
 
 public interface Executor {
 

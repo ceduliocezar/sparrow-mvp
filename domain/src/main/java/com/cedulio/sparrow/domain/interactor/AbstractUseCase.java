@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.domain.interactor.base;
+package com.cedulio.sparrow.domain.interactor;
 
 import com.cedulio.sparrow.domain.executor.Executor;
 import com.cedulio.sparrow.domain.executor.MainThread;
