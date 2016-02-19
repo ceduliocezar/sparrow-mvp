@@ -2,7 +2,7 @@ package com.cedulio.sparrow.domain.formatter.bill;
 
 
 import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
-import com.cedulio.sparrow.domain.utilities.DefaultLocale;
+import com.cedulio.sparrow.domain.language.DefaultLocale;
 
 public class LineItemValueFormatter {
 

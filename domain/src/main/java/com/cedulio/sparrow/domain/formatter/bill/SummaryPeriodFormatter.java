@@ -2,7 +2,7 @@ package com.cedulio.sparrow.domain.formatter.bill;
 
 
 import com.cedulio.sparrow.domain.R;
-import com.cedulio.sparrow.domain.utilities.DefaultLocale;
+import com.cedulio.sparrow.domain.language.DefaultLocale;
 
 import android.content.Context;
 
