@@ -5,6 +5,7 @@ import com.cedulio.sparrow.domain.model.Summary;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class SummaryEntityDataMapper {
@@ -28,11 +29,16 @@ public class SummaryEntityDataMapper {
         return summary;
     }
 
-    public List<Summary> transform(Collection<SummaryEntity> transactionEntityCollection) {
+    public List<Summary> transform(Collection<SummaryEntity> summaryEntityCollection) {
+
+        if (summaryEntityCollection == null) {
+            return Collections.emptyList();
+        }
+
         List<Summary> summaryList = new ArrayList<>();
         Summary summary;
 
-        for (SummaryEntity summaryEntity : transactionEntityCollection) {
+        for (SummaryEntity summaryEntity : summaryEntityCollection) {
             summary = transform(summaryEntity);
             if (summary != null) {
                 summaryList.add(summary);

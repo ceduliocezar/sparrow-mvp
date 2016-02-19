@@ -10,7 +10,7 @@ public class BillDataStoreFactory {
     private Context context;
 
     private BillDataStoreFactory(Context context) {
-        this.context = context;
+        this.context = context.getApplicationContext();
     }
 
     public static BillDataStoreFactory getInstance(Context context) {

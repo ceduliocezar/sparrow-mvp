@@ -94,8 +94,6 @@ public class LineItemDescriptionFormatterTest {
         long index = 2;
         mockIndex(index);
 
-        String stringFormat = "%s %d/%d";
-
         LineItemDescriptionFormatter formatter = new LineItemDescriptionFormatter();
 
         String formattedDescription = formatter.format(mLineItem, state);

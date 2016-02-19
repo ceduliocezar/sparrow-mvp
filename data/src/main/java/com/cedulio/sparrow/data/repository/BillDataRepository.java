@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.data.repository;
 
 
-import com.cedulio.sparrow.data.entity.mapper.BillEntityMapper;
+import com.cedulio.sparrow.data.entity.mapper.BillEntityDataMapper;
 import com.cedulio.sparrow.data.repository.datasource.bill.BillDataStore;
 import com.cedulio.sparrow.data.repository.datasource.bill.BillDataStoreFactory;
 import com.cedulio.sparrow.domain.exception.ConnectionProblemException;
@@ -14,12 +14,12 @@ import java.util.List;
 
 public class BillDataRepository implements BillRepository {
 
-    private final BillEntityMapper mapper;
+    private final BillEntityDataMapper mapper;
 
     private Context context;
 
     public BillDataRepository(Context context) {
-        this.mapper = new BillEntityMapper();
+        this.mapper = new BillEntityDataMapper();
         this.context = context.getApplicationContext();
     }
 
