@@ -22,14 +22,13 @@ public class BillDataRepositoryTest {
     @Mock
     private Bill bill;
 
-    @Mock
+//    @Mock
     private Context context;
 
     @Test
     public void testCloud() throws Exception {
 
-
-//        mockApplicationContext();
+        mockApplicationContext();
 
         BillDataRepository repository = new BillDataRepository(context);
 
