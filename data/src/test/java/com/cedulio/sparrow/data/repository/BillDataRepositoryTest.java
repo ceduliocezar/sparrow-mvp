@@ -22,7 +22,7 @@ public class BillDataRepositoryTest {
     @Mock
     private Bill bill;
 
-//    @Mock
+    @Mock
     private Context context;
 
     @Test
