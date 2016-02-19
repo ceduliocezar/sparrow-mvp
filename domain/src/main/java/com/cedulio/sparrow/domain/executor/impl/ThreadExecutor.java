@@ -1,7 +1,7 @@
 package com.cedulio.sparrow.domain.executor.impl;
 
 import com.cedulio.sparrow.domain.executor.Executor;
-import com.cedulio.sparrow.domain.interactor.base.AbstractUseCase;
+import com.cedulio.sparrow.domain.interactor.AbstractUseCase;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -43,7 +43,7 @@ public class ThreadExecutor implements Executor {
     }
 
 
-    public static Executor getInstance() {
+    public static ThreadExecutor getInstance() {
         if (sThreadExecutor == null) {
             sThreadExecutor = new ThreadExecutor();
         }

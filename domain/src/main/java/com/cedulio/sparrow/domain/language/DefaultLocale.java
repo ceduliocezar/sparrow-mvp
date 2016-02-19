@@ -1,4 +1,4 @@
-package com.cedulio.sparrow.domain.utilities;
+package com.cedulio.sparrow.domain.language;
 
 import java.util.Locale;
 

@@ -1,7 +1,6 @@
 package com.cedulio.sparrow.domain.formatter;
 
-import com.cedulio.sparrow.domain.formatter.CurrencyFormatter;
-import com.cedulio.sparrow.domain.utilities.DefaultLocale;
+import com.cedulio.sparrow.domain.language.DefaultLocale;
 
 import org.junit.Assert;
 import org.junit.Test;

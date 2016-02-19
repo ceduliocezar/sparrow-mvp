@@ -9,7 +9,7 @@ import com.cedulio.sparrow.domain.visibility.bill.GerarBoletoVisibilityChecker;
 import com.cedulio.sparrow.domain.model.Bill;
 import com.cedulio.sparrow.domain.model.LineItem;
 import com.cedulio.sparrow.domain.model.Summary;
-import com.cedulio.sparrow.domain.utilities.DefaultLocale;
+import com.cedulio.sparrow.domain.language.DefaultLocale;
 
 import android.os.Bundle;
 
