@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
@@ -130,7 +131,13 @@ public class BillListActivity extends AppCompatActivity
         int idColor = BillColorSelector.getColor(bill.getState(), this);
         triangleView.setColor(idColor);
         setIconBackColor(idColor);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar_color));
+        updateStatusBarColor();
+    }
+
+    private void updateStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar_color));
+        }
     }
 
     @Override
