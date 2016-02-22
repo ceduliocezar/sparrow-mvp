@@ -48,7 +48,7 @@ public class BillEntityDataMapper {
             return Collections.emptyList();
         }
 
-        List<Bill> billList = Collections.emptyList();
+        List<Bill> billList = new ArrayList<>();
 
         Bill bill;
         for (BillEntity billEntity : billEntityCollection) {

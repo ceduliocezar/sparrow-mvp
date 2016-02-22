@@ -2,12 +2,16 @@ package com.cedulio.sparrow.bill.listing;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -127,6 +131,13 @@ public class BillListActivity extends AppCompatActivity
         int idColor = BillColorSelector.getColor(bill.getState(), this);
         triangleView.setColor(idColor);
         setIconBackColor(idColor);
+        updateStatusBarColor();
+    }
+
+    private void updateStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar_color));
+        }
     }
 
     @Override
