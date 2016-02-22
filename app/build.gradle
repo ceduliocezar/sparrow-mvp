@@ -45,6 +45,7 @@ dependencies {
     compile 'com.jpardogo.materialtabstrip:library:1.1.0'
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    compile 'com.github.alorma:timelineview:2.2.1'
     // Set this dependency to use JUnit 4 rules
     // Set this dependency to build and run Espresso tests
     // Set this dependency to build and run UI Automator tests
