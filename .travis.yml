@@ -18,5 +18,3 @@ after_failure:
   - "cat /home/travis/build/ceduliocezar/sparrow-mvp/data/build/outputs/lint-results.html"
   - echo "---domain"
   - "cat /home/travis/build/ceduliocezar/sparrow-mvp/domain/build/outputs/lint-results.html"
-after_success:
-  - coveralls
