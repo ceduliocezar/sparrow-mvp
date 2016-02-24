@@ -1,1 +1,1 @@
-# Sparrow-MVP [![Coverage Status](https://coveralls.io/repos/github/ceduliocezar/sparrow-mvp/badge.svg?branch=master)](https://coveralls.io/github/ceduliocezar/sparrow-mvp?branch=master)
+# Sparrow-MVP [![Build Status](https://travis-ci.org/ceduliocezar/sparrow-mvp.svg?branch=master)](https://travis-ci.org/ceduliocezar/sparrow-mvp) [![Coverage Status](https://coveralls.io/repos/github/ceduliocezar/sparrow-mvp/badge.svg?branch=master)](https://coveralls.io/github/ceduliocezar/sparrow-mvp?branch=master)
