@@ -1,1 +1,1 @@
-# Bill List
+# Sparrow-MVP [![Coverage Status](https://coveralls.io/repos/github/ceduliocezar/sparrow-mvp/badge.svg?branch=master)](https://coveralls.io/github/ceduliocezar/sparrow-mvp?branch=master)
