@@ -63,7 +63,7 @@ public class CurrencyFormatterTest {
         String formattedDescription = formatter.format(value,
                 DefaultLocale.getLocale());
 
-        Assert.assertTrue("Expected format=R$ 10,00, formatted string=" + formattedDescription,
+        Assert.assertFalse("Expected format=R$ 10,00, formatted string=" + formattedDescription,
                 formattedDescription.equals("R$ 10,00"));
     }
 

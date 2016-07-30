@@ -13,6 +13,8 @@
     <color name="layout_background_color">#f7f7f7</color>
     <color name="status_bar_color">#B6B6B6</color>
 
+    <color name="white">#FFFFFF</color>
+
     <integer-array name="progress_colors">
         <item>@color/bill_overdue</item>
         <item>@color/bill_closed</item>

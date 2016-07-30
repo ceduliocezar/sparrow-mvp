@@ -1,17 +1,17 @@
 package com.cedulio.sparrow.bill;
 
-import com.alorma.timeline.RoundTimelineView;
-import com.cedulio.sparrow.R;
-import com.cedulio.sparrow.domain.formatter.bill.LineItemValueFormatter;
-import com.cedulio.sparrow.domain.formatter.bill.PostDateFormatter;
-import com.cedulio.sparrow.domain.model.LineItem;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.alorma.timeline.RoundTimelineView;
+import com.cedulio.sparrow.R;
+import com.cedulio.sparrow.domain.formatter.bill.LineItemValueFormatter;
+import com.cedulio.sparrow.domain.formatter.bill.PostDateFormatter;
+import com.cedulio.sparrow.domain.model.LineItem;
 
 import java.util.Date;
 import java.util.List;
@@ -23,9 +23,11 @@ public class LineItemAdapter extends BaseAdapter {
     private List<LineItem> items;
 
     private Callback callback;
+    private Context context;
 
 
     public LineItemAdapter(Context context, List<LineItem> items, Callback callback) {
+        setContext(context);
         setInflater(LayoutInflater.from(context));
         setItems(items);
         setCallback(callback);
@@ -58,19 +60,27 @@ public class LineItemAdapter extends BaseAdapter {
         setTitleText(position, convertView);
         setValueText(position, convertView);
 
+        setTimeLineType(position, convertView);
+
+
+        return convertView;
+    }
+
+    private void setTimeLineType(int position, View convertView) {
+
         RoundTimelineView roundView = (RoundTimelineView) convertView.findViewById(R.id.timeline1);
-        if(position == 0 ){
+
+        if(getCount() == 1) {
+            roundView.setTimelineType(RoundTimelineView.TYPE_MIDDLE);
+            roundView.setLineColor(context.getResources().getColor(android.R.color.transparent));
+        }else if(position == 0 ){
             roundView.setTimelineType(RoundTimelineView.TYPE_START);
+
         }else if( position ==  getCount() -1){
             roundView.setTimelineType(RoundTimelineView.TYPE_END);
         }else{
             roundView.setTimelineType(RoundTimelineView.TYPE_DEFAULT);
         }
-
-
-//        setLineVisibility(convertView, position);
-
-        return convertView;
     }
 
     private void setValueText(int position, View convertView) {
@@ -100,32 +110,6 @@ public class LineItemAdapter extends BaseAdapter {
         postDateMonthTextView.setText(PostDateFormatter.formatMonth(postDate));
     }
 
-//    private void setLineVisibility(View convertView, int position) {
-//
-//        setVisibilityLineUp(convertView, position);
-//
-//        setVisibilityLineDown(convertView, position);
-//    }
-
-//    private void setVisibilityLineDown(View convertView, int position) {
-//        View lineDown = convertView.findViewById(R.id.lv_item__line__down);
-//
-//        if (position == getCount() - 1) {
-//            lineDown.setVisibility(View.INVISIBLE);
-//        } else {
-//            lineDown.setVisibility(View.VISIBLE);
-//        }
-//    }
-
-//    private void setVisibilityLineUp(View convertView, int position) {
-//        View lineUp = convertView.findViewById(R.id.lv_item__line__up);
-//        if (position == 0) {
-//            lineUp.setVisibility(View.INVISIBLE);
-//        } else {
-//            lineUp.setVisibility(View.VISIBLE);
-//        }
-//    }
-
     private Callback getCallback() {
         return callback;
     }
@@ -148,6 +132,10 @@ public class LineItemAdapter extends BaseAdapter {
 
     private void setItems(List<LineItem> items) {
         this.items = items;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public interface Callback {
